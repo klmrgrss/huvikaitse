@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/knowledge.json';
+import { renderInline } from '../lib/markdown';
+
+const base = data.basePath || '/huvikaitse';
+const pv = data.pikkVaade;
+const steps = pv?.steps || [];
+const actions = pv?.actions || [];
+const kpis = pv?.kpis || [];
+
+const regularActions = actions.filter((a) => !a.isNew);
+const klimDone = regularActions.filter((a) => a.klimCat === 'valmis').length;
+const klimTotal = regularActions.length;
+const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || a.eeelCat === 'vastassuunaline').length;
+---
+
+<BaseLayout title="Ehituse pikk vaade 2035 — töölaud" activeNav="pikk-vaade">
+  <div class="breadcrumb">
+    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Ehituse pikk vaade 2035 (töölaud)</span>
+  </div>
+
+  <section class="hero">
+    <div class="hero-kicker">Avalik seiretöölaud · 09.06.2021 ühiskondlik kokkulepe</div>
+    <h1>Ehituse pikk vaade 2035</h1>
+    <p>
+      Vabariigi Valitsuse (27.04.2021) ja 18 osapoole (09.06.2021) kokkulepe 7 suure sammu ja 38 tegevuse
+      elluviimiseks. Siin võrdleme ministeeriumi vaheanalüüsi (20.01.2026) tegeliku mõjuga ehitusturul
+      ning koondame aastate lõikes jälgitavad seiremõõdikud.
+    </p>
+    <div class="hero-actions">
+      {pv?.analysisRoute && (
+        <a href={`${base}${pv.analysisRoute}`} class="btn btn-primary">Loe täismahus analüüsi →</a>
+      )}
+      <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`} class="btn btn-ghost">Ava katus-teemakaart</a>
+    </div>
+  </section>
+
+  <!-- 4 headline KPIs -->
+  <div class="grid-4" style="margin-bottom: 22px;">
+    <div class="kpi-tile">
+      <div class="kpi-label">Kokkuleppe mandaat</div>
+      <div class="kpi-val text-info">18</div>
+      <div class="kpi-sub">allkirjastajat (VV, KOV-id, liidud, ülikoolid)</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">Lubatud SKP mõju</div>
+      <div class="kpi-val text-ok">+404,5 M€</div>
+      <div class="kpi-sub">+1,59% SKP / a (rakenduskulu ~60 M€)</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">KLIM „Valmis“ (2026)</div>
+      <div class="kpi-val text-warn">{klimDone} / {klimTotal}</div>
+      <div class="kpi-sub">{Math.round((klimDone / Math.max(klimTotal, 1)) * 100)}% (peamiselt juhendid/struktuurid)</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">Täitmata põhimõju</div>
+      <div class="kpi-val text-danger">70,9%</div>
+      <div class="kpi-sub">Tegevus 2.1 (+287 M€/a) puudub · {eeelCritical} kriitilist võlga</div>
+    </div>
+  </div>
+
+  <!-- 7 steps visual comparison -->
+  <div class="card" style="margin-bottom: 26px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
+      <h2 style="margin:0; font-size:19px; color:#0f2942;">7 suure sammu täitmine: KLIM enesehinnang (20.01.2026) vs EEEL faktiaudit</h2>
+      <span style="font-size:12.5px; color:#64748b;">Paremal: 2022 lõpparuande SKP mõju osakaal</span>
+    </div>
+    <div class="badges" style="margin-bottom: 14px;">
+      <span class="badge badge-ok">● Valmis / reaalne edasiminek</span>
+      <span class="badge badge-info">● KLIM: Töös (~50%)</span>
+      <span class="badge badge-mid">● Osaline / paberil / Alustatud</span>
+      <span class="badge badge-high">● Seisab / kriitiline võlg / vastassuunaline</span>
+    </div>
+
+    {steps.map((s) => {
+      const tot = Math.max(s.total || 1, 1);
+      const k = s.klimCounts || { valmis: 0, toos: 0, alustatud: 0, seisab: 0 };
+      const e = s.eeelCounts || { edasiminek: 0, osaline: 0, kriitiline: 0 };
+      const isHuge = s.code === 'E2';
+      return (
+        <div class="step-row">
+          <div class="step-top">
+            <span class="step-name">{s.code}. {s.name} ({s.total} tegevust)</span>
+            <span class:list={['badge', isHuge ? 'badge-high' : 'badge-brand']} style="font-family:var(--font-mono);">
+              +{s.gdpMln} M€/a · {s.gdpShare} SKP mõjust
+            </span>
+          </div>
+          <div class="bars">
+            <span class="bar-lbl">KLIM 2026</span>
+            <div class="track">
+              {k.valmis > 0 && <div class="seg seg-ok" style={`width:${(k.valmis / tot) * 100}%`} title={`Valmis: ${k.valmis}`} />}
+              {k.toos > 0 && <div class="seg seg-mid" style={`width:${(k.toos / tot) * 100}%`} title={`Töös: ${k.toos}`} />}
+              {k.alustatud > 0 && <div class="seg seg-warn" style={`width:${(k.alustatud / tot) * 100}%`} title={`Alustatud: ${k.alustatud}`} />}
+              {k.seisab > 0 && <div class="seg seg-bad" style={`width:${(k.seisab / tot) * 100}%`} title={`Seisab: ${k.seisab}`} />}
+            </div>
+            <span class="bar-num">{k.valmis}/{k.toos}/{k.alustatud}/{k.seisab}</span>
+
+            <span class="bar-lbl">EEEL audit</span>
+            <div class="track">
+              {e.edasiminek > 0 && <div class="seg seg-ok" style={`width:${(e.edasiminek / tot) * 100}%`} title={`Edasiminek: ${e.edasiminek}`} />}
+              {e.osaline > 0 && <div class="seg seg-warn" style={`width:${(e.osaline / tot) * 100}%`} title={`Osaline: ${e.osaline}`} />}
+              {e.kriitiline > 0 && <div class="seg seg-bad" style={`width:${(e.kriitiline / tot) * 100}%`} title={`Kriitiline/seisab: ${e.kriitiline}`} />}
+            </div>
+            <span class="bar-num">{e.edasiminek}/{e.osaline}/{e.kriitiline}</span>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Interactive 39 actions matrix -->
+  <div class="section-head">
+    <h2>Kõigi 39 tegevuse täitmismaatriks</h2>
+    <p class="section-sub">Andmed sünkroonitakse otse EEEL-i Obsidiani analüüsitabelitest (sh Märkused)</p>
+  </div>
+
+  <div class="filter-bar">
+    <div class="chip-group" id="step-chips">
+      <button class="chip active" data-step="all">Kõik sammud</button>
+      {steps.map((s) => (
+        <button class="chip" data-step={s.code}>{s.code}</button>
+      ))}
+    </div>
+    <div class="chip-group" id="status-chips">
+      <button class="chip active" data-status="all">Kõik seisud</button>
+      <button class="chip" data-status="kriitiline">🔴 Kriitiline / seisab</button>
+      <button class="chip" data-status="vastassuunaline">⛔ Vastassuunaline</button>
+      <button class="chip" data-status="osaline">🟡 Osaline / paberil</button>
+      <button class="chip" data-status="edasiminek">🟢 Edasiminek</button>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom: 30px;">
+    <table id="actions-table">
+      <thead>
+        <tr>
+          <th style="width:6%">Nr</th>
+          <th style="width:22%">Tegevus ja põhiväljund</th>
+          <th style="width:10%">Vastutaja</th>
+          <th style="width:11%">KLIM 2026</th>
+          <th style="width:30%">EEEL-i hinnang ja selgitus</th>
+          <th style="width:13%">Seotud teema</th>
+          <th style="width:8%">Märkused</th>
+        </tr>
+      </thead>
+      <tbody>
+        {actions.map((a) => (
+          <tr data-step={a.goalCode} data-status={a.eeelCat}>
+            <td><strong>{a.nr}</strong></td>
+            <td set:html={renderInline(a.title)} />
+            <td>{a.owner}</td>
+            <td><span class="badge">{a.klimStatus}</span></td>
+            <td set:html={renderInline(a.eeelAssessment)} />
+            <td set:html={renderInline(a.related)} />
+            <td set:html={renderInline(a.note || '—')} />
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Interactive 24 KPI monitoring registry -->
+  <div class="section-head">
+    <h2>Aastate lõikes jälgitavad seiremõõdikud ({kpis.length} tuummõõdikut)</h2>
+    <p class="section-sub">Avalikest allikatest ja 1× aastas EEEL-i liikmeküsitlusest korratav mõõdikupank</p>
+  </div>
+
+  <div class="filter-bar">
+    <input id="kpi-search" type="search" class="search-input" placeholder="Filtreeri mõõdikuid märksõna või allika järgi (nt Eurostat, RHR, EMTA, Soome, kutse)…" />
+    <div class="chip-group" id="kpi-step-chips">
+      <button class="chip active" data-kpi-step="all">Kõik</button>
+      {steps.map((s) => (
+        <button class="chip" data-kpi-step={s.code}>{s.code}</button>
+      ))}
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="kpi-table">
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:27%">Mõõdik ja ühik</th>
+          <th style="width:10%">Samm</th>
+          <th style="width:16%">Baastase</th>
+          <th style="width:21%">2030 / 2035 siht &amp; võrdlus</th>
+          <th style="width:14%">Andmeallikas</th>
+          <th style="width:7%">Sagedus</th>
+        </tr>
+      </thead>
+      <tbody>
+        {kpis.map((k) => (
+          <tr data-kpi-step={k.stepCode} data-kpi-text={`${k.name} ${k.step} ${k.baseline} ${k.target} ${k.source}`.toLowerCase()}>
+            <td><strong>{k.id}</strong></td>
+            <td set:html={renderInline(k.name)} />
+            <td><span class="badge badge-brand">{k.step}</span></td>
+            <td set:html={renderInline(k.baseline)} />
+            <td set:html={renderInline(k.target)} />
+            <td>{k.source}</td>
+            <td>{k.frequency}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Actions filter
+    let activeStep = 'all';
+    let activeStatus = 'all';
+    const actionRows = Array.from(document.querySelectorAll('#actions-table tbody tr'));
+
+    function applyActionFilters() {
+      actionRows.forEach((tr) => {
+        const s = tr.getAttribute('data-step');
+        const st = tr.getAttribute('data-status');
+        const okStep = activeStep === 'all' || s === activeStep;
+        const okStatus = activeStatus === 'all' || st === activeStatus;
+        tr.classList.toggle('hidden', !(okStep && okStatus));
+      });
+    }
+
+    document.querySelectorAll('#step-chips .chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#step-chips .chip').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeStep = btn.getAttribute('data-step') || 'all';
+        applyActionFilters();
+      });
+    });
+
+    document.querySelectorAll('#status-chips .chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#status-chips .chip').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeStatus = btn.getAttribute('data-status') || 'all';
+        applyActionFilters();
+      });
+    });
+
+    // KPI filter
+    let kpiStep = 'all';
+    const kpiSearch = document.getElementById('kpi-search') as HTMLInputElement | null;
+    const kpiRows = Array.from(document.querySelectorAll('#kpi-table tbody tr'));
+
+    function applyKpiFilters() {
+      const q = (kpiSearch?.value || '').trim().toLowerCase();
+      kpiRows.forEach((tr) => {
+        const s = tr.getAttribute('data-kpi-step');
+        const txt = tr.getAttribute('data-kpi-text') || '';
+        const okStep = kpiStep === 'all' || s === kpiStep;
+        const okQ = !q || txt.includes(q);
+        tr.classList.toggle('hidden', !(okStep && okQ));
+      });
+    }
+
+    kpiSearch?.addEventListener('input', applyKpiFilters);
+    document.querySelectorAll('#kpi-step-chips .chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#kpi-step-chips .chip').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        kpiStep = btn.getAttribute('data-kpi-step') || 'all';
+        applyKpiFilters();
+      });
+    });
+  </script>
+</BaseLayout>

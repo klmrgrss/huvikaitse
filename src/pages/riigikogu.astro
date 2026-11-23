@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/knowledge.json';
+import { renderMarkdown } from '../lib/markdown';
+
+const base = data.basePath || '/huvikaitse';
+const rk = data.riigikogu;
+const html = rk ? renderMarkdown(rk.markdown) : '<p>Sisu lisamisel.</p>';
+---
+
+<BaseLayout title="Ootused järgmisele Riigikogu koosseisule (6 suunda)" activeNav="riigikogu">
+  <div class="breadcrumb">
+    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Riigikogu 6 suunda</span>
+  </div>
+
+  <section class="hero" style="padding:26px 28px;">
+    <div class="hero-kicker">Poliitika ja õigusloome · 6 keskset suunda</div>
+    <h1>{rk?.title || 'Ootused järgmisele Riigikogu koosseisule'}</h1>
+    <p>
+      EEEL-i koondseisukohad kohtumisteks erakondade, Riigikogu komisjonide, ministeeriumide ja meediaga.
+      Iga suund viitab otse elavatele teemakaartidele.
+    </p>
+  </section>
+
+  <article class="card prose" set:html={html} />
+</BaseLayout>

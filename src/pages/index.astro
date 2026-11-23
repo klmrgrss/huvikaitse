@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/knowledge.json';
+
+const base = data.basePath || '/huvikaitse';
+const highPrioTopics = data.topics.filter((t) => t.priority === 'Kõrge');
+const searchDocs = [
+  ...data.topics.map((t) => ({
+    title: t.title,
+    route: `${base}${t.route}`,
+    kind: 'Teemakaart',
+    group: t.workgroup,
+    summary: t.summary,
+    haystack: `${t.title} ${t.workgroup} ${t.summary} ${t.keyPoints.join(' ')} ${t.audiences.join(' ')}`.toLowerCase(),
+  })),
+  ...data.analyses.map((a) => ({
+    title: a.title,
+    route: `${base}${a.route}`,
+    kind: 'Analüüs',
+    group: 'Süvaanalüüs',
+    summary: a.summary,
+    haystack: `${a.title} ${a.summary}`.toLowerCase(),
+  })),
+  {
+    title: 'Ehituse pikk vaade 2035 — avalik töölaud ja 24 seiremõõdikut',
+    route: `${base}/pikk-vaade-2035/`,
+    kind: 'Töölaud',
+    group: 'Katuskokkulepe',
+    summary: 'KLIM 2026 vaheanalüüs vs EEEL faktiaudit, 39 tegevuse maatriks ja 24 aastast seiremõõdikut.',
+    haystack: 'ehituse pikk vaade 2035 töölaud seiremõõdikud kpi klim audit kontratsüklilisus solidaarvastutus kutsesüsteem',
+  },
+];
+---
+
+<BaseLayout title="Avaleht" activeNav="home">
+  <section class="hero">
+    <div class="hero-kicker">Eesti Ehitusettevõtjate Liit · Avalik teadmusportaal</div>
+    <h1>Ehitussektori seisukohad, analüütika ja „Pikk vaade 2035“ seire</h1>
+    <p>
+      Koondame ühte avatud vaatesse EEEL-i kinnitatud huvikaitseseisukohad, 6 keskset suunda järgmisele
+      Riigikogu koosseisule ning faktipõhise seire 18 osapoole allkirjastatud kokkuleppele „Ehituse pikk vaade 2035“.
+    </p>
+    <div class="hero-actions">
+      <a href={`${base}/pikk-vaade-2035/`} class="btn btn-primary">Ava „Pikk vaade 2035“ töölaud →</a>
+      <a href={`${base}/teemad/`} class="btn btn-ghost">Sirvi kõiki teemakaarte ({data.counts.topics})</a>
+      <a href={`${base}/riigikogu/`} class="btn btn-ghost">6 suunda Riigikogule</a>
+    </div>
+  </section>
+
+  <div class="grid-4" style="margin-bottom: 20px;">
+    <div class="kpi-tile">
+      <div class="kpi-label">Kinnitatud teemakaarte</div>
+      <div class="kpi-val">{data.counts.topics}</div>
+      <div class="kpi-sub">3 töörühma + Pika vaate katus</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">Kõrge prioriteet</div>
+      <div class="kpi-val text-danger">{highPrioTopics.length}</div>
+      <div class="kpi-sub">aktiivse huvikaitse fookusteemat</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">Pika vaate seiremõõdikud</div>
+      <div class="kpi-val text-info">{data.counts.kpis}</div>
+      <div class="kpi-sub">aastate lõikes jälgitavat KPI-d</div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-label">Teadmuse uuendus</div>
+      <div class="kpi-val" style="font-size: 20px; padding-top: 4px;">{data.syncedAtDisplay}</div>
+      <div class="kpi-sub">automaatne sünk Obsidianist</div>
+    </div>
+  </div>
+
+  <!-- Live instant search -->
+  <div class="filter-bar">
+    <input
+      id="home-search"
+      type="search"
+      class="search-input"
+      placeholder="Otsi teemat, märksõna või seisukohta (nt solidaarvastutus, planeeringud, ETÜ, kutsesüsteem, kontratsüklilisus)…"
+      aria-label="Otsi teadmusbaasist"
+    />
+  </div>
+  <div id="search-results" class="grid-2 hidden" style="margin-bottom: 24px;"></div>
+
+  <!-- Pikk vaade 2035 banner -->
+  <div class="card" style="border-left: 5px solid #0f2942; margin-bottom: 24px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
+      <div style="flex:1 1 480px;">
+        <div class="badges" style="margin-bottom:8px;">
+          <span class="badge badge-brand">Katuskokkulepe · 09.06.2021</span>
+          <span class="badge badge-high">70,9% SKP mõjust täitmata</span>
+          <span class="badge badge-mid">KLIM 2026: 4 / 39 valmis</span>
+        </div>
+        <h2 style="margin:0 0 8px; font-size:21px; color:#0f2942;">Ehituse pikk vaade 2035 — avalik seiretöölaud</h2>
+        <p style="margin:0; color:#475569; font-size:14.5px;">
+          Võrdleme Vabariigi Valitsuse ja 18 partneri allkirjastatud kokkuleppe lubadusi tegeliku edenemisega turul:
+          7 suurt sammu, 39 tegevuse kriitiline audit (sh erasektori enda ülesanded) ja 24 aastast seiremõõdikut.
+        </p>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-self:center;">
+        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Vaata töölauda →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Töörühma -->
+  <div class="section-head">
+    <h2>EEEL-i 3 töörühma ja fookusteemad</h2>
+    <a href={`${base}/teemad/`} class="section-sub">Kõik teemad filtritega →</a>
+  </div>
+  <div class="grid-3">
+    {data.workgroups.map((wg) => {
+      const wgTopics = data.topics.filter((t) => t.workgroup === wg.title);
+      return (
+        <div class="card" style="display:flex; flex-direction:column; gap:10px;">
+          <div>
+            <span class="badge badge-brand">Töörühm</span>
+            <h3 style="margin:8px 0 6px; font-size:18px; color:#0f2942;">{wg.title}</h3>
+            <p style="margin:0; font-size:13.5px; color:#475569;">{wg.summary}</p>
+          </div>
+          <ul style="margin:4px 0 0; padding-left:18px; font-size:13.5px; flex:1;">
+            {wgTopics.map((t) => (
+              <li style="margin-bottom:5px;">
+                <a href={`${base}${t.route}`}>{t.title}</a>
+              </li>
+            ))}
+          </ul>
+          <a href={`${base}/teemad/?toogrupp=${wg.slug}`} style="font-size:13px; font-weight:600; margin-top:4px;">
+            Ava töörühma teemad ({wgTopics.length}) →
+          </a>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Kõrge prioriteediga teemad -->
+  <div class="section-head">
+    <h2>Kõrge prioriteediga huvikaitse teemad</h2>
+    <p class="section-sub">Aktiivsed seisukohad ja kehtivad jutupunktid</p>
+  </div>
+  <div class="grid-2">
+    {highPrioTopics.slice(0, 6).map((t) => (
+      <a href={`${base}${t.route}`} class:list={['card topic-card', { featured: t.slug.includes('pikk-vaade-2035') }]}>
+        <div class="badges">
+          <span class="badge badge-brand">{t.workgroup}</span>
+          {t.status && <span class="badge">{t.status}</span>}
+        </div>
+        <h3>{t.title}</h3>
+        <p>{t.summary}</p>
+      </a>
+    ))}
+  </div>
+
+  <script define:vars={{ searchDocs }}>
+    const input = document.getElementById('home-search');
+    const resBox = document.getElementById('search-results');
+    if (input && resBox) {
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        if (q.length < 2) {
+          resBox.classList.add('hidden');
+          resBox.innerHTML = '';
+          return;
+        }
+        const hits = searchDocs.filter((d) => d.haystack.includes(q)).slice(0, 8);
+        resBox.classList.remove('hidden');
+        if (!hits.length) {
+          resBox.innerHTML = '<div class="card" style="grid-column:1/-1;color:#64748b;">Vasteid ei leitud. Proovi teist märksõna.</div>';
+          return;
+        }
+        resBox.innerHTML = hits
+          .map(
+            (h) => `
+          <a href="${h.route}" class="card topic-card">
+            <div class="badges">
+              <span class="badge badge-info">${h.kind}</span>
+              <span class="badge">${h.group}</span>
+            </div>
+            <h3>${h.title}</h3>
+            <p>${h.summary}</p>
+          </a>`
+          )
+          .join('');
+      });
+    }
+  </script>
+</BaseLayout>

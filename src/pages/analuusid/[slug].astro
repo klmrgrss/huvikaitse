@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import data from '../../data/knowledge.json';
+import { renderMarkdown } from '../../lib/markdown';
+
+export function getStaticPaths() {
+  return data.analyses.map((analysis) => ({
+    params: { slug: analysis.slug },
+    props: { analysis },
+  }));
+}
+
+const { analysis } = Astro.props;
+const base = data.basePath || '/huvikaitse';
+const contentHtml = renderMarkdown(analysis.markdown);
+---
+
+<BaseLayout title={analysis.title} description={analysis.summary} activeNav="analuusid">
+  <div class="breadcrumb">
+    <a href={`${base}/`}>Avaleht</a> <span>/</span>
+    <a href={`${base}/analuusid/`}>Analüüsid</a> <span>/</span>
+    <span>{analysis.title}</span>
+  </div>
+
+  <article class="card">
+    <div class="badges" style="margin-bottom:10px;">
+      <span class="badge badge-brand">EEEL analüüs</span>
+      {analysis.updated && <span class="badge">Kuupäev: {analysis.updated}</span>}
+    </div>
+    <h1 style="margin:0 0 16px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
+      {analysis.title}
+    </h1>
+
+    {analysis.slug.includes('pikk-vaade-2035') && (
+      <div style="margin-bottom:18px;">
+        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Ava interaktiivne „Pikk vaade 2035“ töölaud →</a>
+      </div>
+    )}
+
+    <div class="prose" set:html={contentHtml} />
+
+    {analysis.backlinks && analysis.backlinks.length > 0 && (
+      <div class="backlinks-box">
+        <h3>Seotud lehed</h3>
+        <div class="badges">
+          {analysis.backlinks.map((bl) => (
+            <a href={`${base}${bl.route}`} class="badge badge-brand" style="padding:5px 10px;">
+              ↗ {bl.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</BaseLayout>

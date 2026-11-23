@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import data from '../../data/knowledge.json';
+import { renderMarkdown } from '../../lib/markdown';
+
+export function getStaticPaths() {
+  return data.topics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+const base = data.basePath || '/huvikaitse';
+const contentHtml = renderMarkdown(topic.markdown);
+---
+
+<BaseLayout title={topic.title} description={topic.summary} activeNav="teemad">
+  <div class="breadcrumb">
+    <a href={`${base}/`}>Avaleht</a> <span>/</span>
+    <a href={`${base}/teemad/`}>Teemakaardid</a> <span>/</span>
+    <span>{topic.title}</span>
+  </div>
+
+  <article class="card">
+    <div class="badges" style="margin-bottom:10px;">
+      {topic.workgroup && <span class="badge badge-brand">{topic.workgroup}</span>}
+      {topic.priority === 'Kõrge' && <span class="badge badge-high">Prioriteet: Kõrge</span>}
+      {topic.priority === 'Keskmine' && <span class="badge badge-mid">Prioriteet: Keskmine</span>}
+      {topic.status && <span class="badge badge-info">{topic.status}</span>}
+      {topic.updated && <span class="badge">Uuendatud: {topic.updated}</span>}
+    </div>
+
+    <h1 style="margin:0 0 12px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
+      {topic.title}
+    </h1>
+
+    {topic.audiences && topic.audiences.length > 0 && (
+      <div style="font-size:13px; color:#64748b; margin-bottom:16px;">
+        <strong>Sihtrühmad:</strong> {topic.audiences.join(' · ')}
+      </div>
+    )}
+
+    {topic.slug.includes('pikk-vaade-2035') && (
+      <div style="margin-bottom:16px;">
+        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Ava interaktiivne „Pikk vaade 2035“ töölaud →</a>
+      </div>
+    )}
+
+    <div class="prose" set:html={contentHtml} />
+
+    {topic.backlinks && topic.backlinks.length > 0 && (
+      <div class="backlinks-box">
+        <h3>Seotud lehed (tagasiviited teadmusbaasist)</h3>
+        <div class="badges">
+          {topic.backlinks.map((bl) => (
+            <a href={`${base}${bl.route}`} class="badge badge-brand" style="padding:5px 10px;">
+              ↗ {bl.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</BaseLayout>

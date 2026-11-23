@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import data from '../data/knowledge.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeNav?: 'home' | 'pikk-vaade' | 'teemad' | 'riigikogu' | 'analuusid';
+}
+
+const {
+  title,
+  description = 'Eesti Ehitusettevõtjate Liidu (EEEL) avalik huvikaitse, seisukohtade ja „Ehituse pikk vaade 2035“ seire teadmusportaal.',
+  activeNav = 'home',
+} = Astro.props;
+
+const base = data.basePath || '/huvikaitse';
+---
+<!DOCTYPE html>
+<html lang="et">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · EEEL Huvikaitse</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href={`${base}/`} class="brand-link">
+          <span class="brand-mark">EEEL</span>
+          <span>Huvikaitse ja teadmus</span>
+          <span class="brand-sub">· Ehitussektori seisukohad</span>
+        </a>
+        <nav class="main-nav" aria-label="Peamenüü">
+          <a href={`${base}/`} class:list={['nav-link', { active: activeNav === 'home' }]}>Avaleht</a>
+          <a href={`${base}/pikk-vaade-2035/`} class:list={['nav-link', { active: activeNav === 'pikk-vaade' }]}>Pikk vaade 2035</a>
+          <a href={`${base}/teemad/`} class:list={['nav-link', { active: activeNav === 'teemad' }]}>Teemad ({data.counts.topics})</a>
+          <a href={`${base}/riigikogu/`} class:list={['nav-link', { active: activeNav === 'riigikogu' }]}>Riigikogu 6 suunda</a>
+          <a href={`${base}/analuusid/`} class:list={['nav-link', { active: activeNav === 'analuusid' }]}>Analüüsid</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>Eesti Ehitusettevõtjate Liit (EEEL)</strong> ·
+          <a href="https://eeel.ee" target="_blank" rel="noopener">eeel.ee</a> ·
+          <a href="mailto:eeel@eeel.ee">eeel@eeel.ee</a>
+        </div>
+        <div>
+          Sünkroonitud EEEL-i teadmusbaasist (Obsidian): <strong>{data.syncedAtDisplay}</strong>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

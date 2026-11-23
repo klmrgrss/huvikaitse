@@ -1,0 +1,16 @@
+{
+  "name": "eeel-huvikaitse",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "python3 scripts/sync_from_obsidian.py",
+    "sync:build": "python3 scripts/sync_from_obsidian.py && astro build"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "marked": "^15.0.0"
+  }
+}
