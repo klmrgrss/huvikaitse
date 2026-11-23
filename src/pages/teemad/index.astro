@@ -4,9 +4,12 @@ import data from '../../data/knowledge.json';
 
 const base = data.basePath || '/huvikaitse';
 const wgOptions = [
-  { slug: 'all', label: 'Kõik valdkonnad' },
-  { slug: 'ulene-koik-3-tooruhma', label: 'Ülene (Pikk vaade)' },
-  ...data.workgroups.map((w) => ({ slug: w.slug, label: w.title })),
+  { slug: 'all', label: `Kõik valdkonnad (${data.topics.length})` },
+  { slug: 'ulene-koik-3-tooruhma', label: 'Ülene (Pikk vaade 2035)' },
+  ...data.workgroups.map((w) => {
+    const cnt = data.topics.filter((t) => t.workgroupSlug === w.slug).length;
+    return { slug: w.slug, label: `${w.title} (${cnt})` };
+  }),
 ];
 ---
 
@@ -15,52 +18,82 @@ const wgOptions = [
     <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Teemad</span>
   </div>
 
-  <div class="section-head" style="margin-top:0;">
-    <h1 style="margin:0; font-size:28px; color:#0f2942;">EEELi seisukohad</h1>
-  </div>
+  <div class="tufte-grid">
+    <div class="tufte-main">
+      <h1>EEELi seisukohad</h1>
+      <p class="lead">
+        Valdkondlikud põhimõtted, lahendused ja taustamõju kolme töörühma ning „Ehituse pika vaate 2035“ lõikes.
+      </p>
 
-  <div class="filter-bar">
-    <input id="topic-search" type="search" class="search-input" placeholder="Otsi teemat või märksõna…" />
-    <div class="chip-group" id="wg-chips">
-      {wgOptions.map((w, idx) => (
-        <button class:list={['chip', { active: idx === 0 }]} data-wg={w.slug}>{w.label}</button>
-      ))}
+      <ul class="editorial-list" id="topics-list" style="margin-top: 1.5rem;">
+        {data.topics.map((t) => (
+          <li
+            class="editorial-item topic-row"
+            data-wg={t.workgroupSlug}
+            data-search={`${t.title} ${t.workgroup} ${t.summary} ${t.keyPoints.join(' ')}`.toLowerCase()}
+          >
+            <div class="editorial-item-meta">
+              <span class="small-caps">{t.workgroup}</span>
+              <span class="mono-num">{t.updated || ''}</span>
+            </div>
+            <h2 class="editorial-item-title" style="font-style: normal; border: none; padding: 0;">
+              <a href={`${base}${t.route}`}>{t.title}</a>
+            </h2>
+            <p class="editorial-item-summary">{t.summary}</p>
+          </li>
+        ))}
+      </ul>
+      <p id="no-results" class="hidden" style="color: var(--ink-muted); margin-top: 1.5rem;">
+        Valitud filtrile vastavaid teemasid ei leitud.
+      </p>
     </div>
-  </div>
 
-  <div class="grid-2" id="topics-grid">
-    {data.topics.map((t) => (
-      <a
-        href={`${base}${t.route}`}
-        class:list={['card topic-card', { featured: t.slug.includes('pikk-vaade-2035') }]}
-        data-wg={t.workgroupSlug}
-        data-search={`${t.title} ${t.workgroup} ${t.summary} ${t.keyPoints.join(' ')}`.toLowerCase()}
-      >
-        <div class="badges">
-          <span class="badge badge-brand">{t.workgroup}</span>
+    <!-- Right margin column: search and plain-text workgroup toggles -->
+    <aside class="tufte-margin margin-first-mobile" aria-label="Filtreerimine">
+      <div class="margin-block">
+        <p class="margin-heading">Otsing</p>
+        <input
+          id="topic-search"
+          type="search"
+          class="tufte-input"
+          placeholder="Filtreeri märksõna järgi…"
+          aria-label="Otsi teemasid"
+        />
+      </div>
+
+      <div class="margin-block">
+        <p class="margin-heading">Valdkond</p>
+        <div class="toggle-group-vertical" id="wg-toggles">
+          {wgOptions.map((w, idx) => (
+            <button class:list={['toggle-btn', { active: idx === 0 }]} data-wg={w.slug}>
+              {w.label}
+            </button>
+          ))}
         </div>
-        <h3>{t.title}</h3>
-        <p>{t.summary}</p>
-        <div style="display:flex; justify-content:space-between; font-size:12px; color:#64748b; margin-top:4px;">
-          <span>Uuendatud: {t.updated || '—'}</span>
-          <span>Loe seisukohta →</span>
-        </div>
-      </a>
-    ))}
+      </div>
+
+      <div class="margin-block">
+        <p class="margin-heading">Seiretöölaud</p>
+        <p style="margin: 0;">
+          Kokkuleppe 7 sammu ja 24 mõõdiku võrdlus on koondatud{' '}
+          <a href={`${base}/pikk-vaade-2035/`}>„Pikk vaade 2035“ töölauale</a>.
+        </p>
+      </div>
+    </aside>
   </div>
 
   <script>
     let activeWg = 'all';
     const searchInput = document.getElementById('topic-search') as HTMLInputElement | null;
-    const cards = Array.from(document.querySelectorAll('#topics-grid .topic-card'));
+    const rows = Array.from(document.querySelectorAll('#topics-list .topic-row'));
+    const noRes = document.getElementById('no-results');
 
-    // Read initial ?toogrupp= query param if present
     const params = new URLSearchParams(window.location.search);
     const paramWg = params.get('toogrupp');
     if (paramWg) {
-      const targetBtn = document.querySelector(`#wg-chips .chip[data-wg="${paramWg}"]`);
+      const targetBtn = document.querySelector(`#wg-toggles .toggle-btn[data-wg="${paramWg}"]`);
       if (targetBtn) {
-        document.querySelectorAll('#wg-chips .chip').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('#wg-toggles .toggle-btn').forEach((b) => b.classList.remove('active'));
         targetBtn.classList.add('active');
         activeWg = paramWg;
       }
@@ -68,18 +101,22 @@ const wgOptions = [
 
     function applyFilters() {
       const q = (searchInput?.value || '').trim().toLowerCase();
-      cards.forEach((c) => {
-        const wg = c.getAttribute('data-wg') || '';
-        const txt = c.getAttribute('data-search') || '';
+      let visible = 0;
+      rows.forEach((row) => {
+        const wg = row.getAttribute('data-wg') || '';
+        const txt = row.getAttribute('data-search') || '';
         const okWg = activeWg === 'all' || wg === activeWg;
         const okQ = !q || txt.includes(q);
-        c.classList.toggle('hidden', !(okWg && okQ));
+        const show = okWg && okQ;
+        row.classList.toggle('hidden', !show);
+        if (show) visible++;
       });
+      noRes?.classList.toggle('hidden', visible > 0);
     }
 
-    document.querySelectorAll('#wg-chips .chip').forEach((btn) => {
+    document.querySelectorAll('#wg-toggles .toggle-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('#wg-chips .chip').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('#wg-toggles .toggle-btn').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         activeWg = btn.getAttribute('data-wg') || 'all';
         applyFilters();

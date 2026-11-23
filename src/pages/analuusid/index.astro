@@ -10,30 +10,37 @@ const base = data.basePath || '/huvikaitse';
     <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Analüüsid</span>
   </div>
 
-  <div class="section-head" style="margin-top:0;">
-    <h1 style="margin:0; font-size:28px; color:#0f2942;">Analüüsid ja ülevaated</h1>
-    <p class="section-sub">Faktipõhised taustaanalüüsid, auditid ja rahvusvahelised võrdlused</p>
-  </div>
+  <div class="tufte-grid">
+    <div class="tufte-main">
+      <h1>Analüüsid ja ülevaated</h1>
+      <p class="lead">Faktipõhised taustaanalüüsid ja rahvusvahelised võrdlused.</p>
 
-  <div class="grid-2">
-    <a href={`${base}/pikk-vaade-2035/`} class="card topic-card featured">
-      <div class="badges">
-        <span class="badge badge-info">Interaktiivne töölaud</span>
-        <span class="badge badge-brand">Pikk vaade 2035</span>
-      </div>
-      <h3>Ehituse pikk vaade 2035 — avalik seiretöölaud</h3>
-      <p>7 suure sammu visuaalne võrdlus, filtreeritav 39 tegevuse täitmismaatriks ja 24 aastase seiremõõdiku register.</p>
-    </a>
+      <ul class="editorial-list" style="margin-top: 1.5rem;">
+        <li class="editorial-item">
+          <div class="editorial-item-meta">
+            <span class="small-caps">Seiretöölaud</span>
+          </div>
+          <h2 class="editorial-item-title" style="font-style: normal; border: none; padding: 0;">
+            <a href={`${base}/pikk-vaade-2035/`}>Ehituse pikk vaade 2035 — avalik seiretöölaud</a>
+          </h2>
+          <p class="editorial-item-summary">
+            7 suure sammu visuaalne võrdlus, filtreeritav 39 tegevuse ülevaade ja 24 aastate lõikes jälgitavat seiremõõdikut.
+          </p>
+        </li>
 
-    {data.analyses.map((a) => (
-      <a href={`${base}${a.route}`} class="card topic-card">
-        <div class="badges">
-          <span class="badge badge-brand">Analüüs</span>
-          {a.updated && <span class="badge">{a.updated}</span>}
-        </div>
-        <h3>{a.title}</h3>
-        <p>{a.summary}</p>
-      </a>
-    ))}
+        {data.analyses.map((a) => (
+          <li class="editorial-item">
+            <div class="editorial-item-meta">
+              <span class="small-caps">Analüüs</span>
+              <span class="mono-num">{a.updated || ''}</span>
+            </div>
+            <h2 class="editorial-item-title" style="font-style: normal; border: none; padding: 0;">
+              <a href={`${base}${a.route}`}>{a.title}</a>
+            </h2>
+            <p class="editorial-item-summary">{a.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </BaseLayout>

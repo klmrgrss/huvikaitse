@@ -22,35 +22,57 @@ const contentHtml = renderMarkdown(topic.markdown);
     <span>{topic.title}</span>
   </div>
 
-  <article class="card">
-    <div class="badges" style="margin-bottom:10px;">
-      {topic.workgroup && <span class="badge badge-brand">{topic.workgroup}</span>}
-      {topic.updated && <span class="badge">Uuendatud: {topic.updated}</span>}
+  <article class="tufte-grid">
+    <div class="tufte-main">
+      <h1>{topic.title}</h1>
+
+      {topic.slug.includes('pikk-vaade-2035') && (
+        <p style="font-family: var(--font-sans); font-size: 0.92rem; margin-bottom: 1.4rem;">
+          <a href={`${base}/pikk-vaade-2035/`} class="action-link">Ava interaktiivne „Pikk vaade 2035“ seiretöölaud →</a>
+        </p>
+      )}
+
+      <div class="prose" set:html={contentHtml} />
     </div>
 
-    <h1 style="margin:0 0 16px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
-      {topic.title}
-    </h1>
-
-    {topic.slug.includes('pikk-vaade-2035') && (
-      <div style="margin-bottom:16px;">
-        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Ava interaktiivne „Pikk vaade 2035“ töölaud →</a>
+    <!-- Tufte margin column: contextual metadata & related topics directly beside content -->
+    <aside class="tufte-margin" aria-label="Teema metaandmed ja seosed">
+      <div class="margin-block">
+        <p class="margin-heading">Valdkond</p>
+        <p style="margin: 0 0 0.35rem; color: var(--ink);">
+          {topic.workgroupSlug && topic.workgroupSlug !== 'ulene-koik-3-tooruhma' ? (
+            <a href={`${base}/teemad/?toogrupp=${topic.workgroupSlug}`}>{topic.workgroup}</a>
+          ) : (
+            topic.workgroup
+          )}
+        </p>
+        {topic.updated && (
+          <p style="margin: 0; font-family: var(--font-sans); font-size: 0.8rem; color: var(--ink-muted);">
+            Uuendatud: <span class="mono-num">{topic.updated}</span>
+          </p>
+        )}
       </div>
-    )}
 
-    <div class="prose" set:html={contentHtml} />
-
-    {topic.backlinks && topic.backlinks.length > 0 && (
-      <div class="backlinks-box">
-        <h3>Seotud teemad</h3>
-        <div class="badges">
-          {topic.backlinks.map((bl) => (
-            <a href={`${base}${bl.route}`} class="badge badge-brand" style="padding:5px 10px;">
-              ↗ {bl.title}
-            </a>
-          ))}
+      {topic.backlinks && topic.backlinks.length > 0 && (
+        <div class="margin-block">
+          <p class="margin-heading">Seotud teemad</p>
+          <ul class="margin-links">
+            {topic.backlinks.map((bl) => (
+              <li>
+                <a href={`${base}${bl.route}`}>{bl.title}</a>
+              </li>
+            ))}
+          </ul>
         </div>
+      )}
+
+      <div class="margin-block">
+        <p class="margin-heading">Navigatsioon</p>
+        <ul class="margin-links" style="font-family: var(--font-sans); font-size: 0.84rem;">
+          <li><a href={`${base}/teemad/`}>← Kõik teemad</a></li>
+          <li><a href={`${base}/pikk-vaade-2035/`}>Pikk vaade 2035 töölaud →</a></li>
+        </ul>
       </div>
-    )}
+    </aside>
   </article>
 </BaseLayout>

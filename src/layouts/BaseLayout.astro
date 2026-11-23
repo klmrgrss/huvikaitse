@@ -23,13 +23,17 @@ const base = data.basePath || '/huvikaitse';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === 'Avaleht' ? 'EEELi seisukohad' : `${title} · EEELi seisukohad`}</title>
     <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
-        <a href={`${base}/`} class="brand-link">
-          <span>EEELi seisukohad</span>
-        </a>
+      <div class="page-wrap header-inner">
+        <a href={`${base}/`} class="brand-link">EEELi seisukohad</a>
         <nav class="main-nav" aria-label="Peamenüü">
           <a href={`${base}/`} class:list={['nav-link', { active: activeNav === 'home' }]}>Avaleht</a>
           <a href={`${base}/pikk-vaade-2035/`} class:list={['nav-link', { active: activeNav === 'pikk-vaade' }]}>Pikk vaade 2035</a>
@@ -42,20 +46,20 @@ const base = data.basePath || '/huvikaitse';
     </header>
 
     <main>
-      <div class="container">
+      <div class="page-wrap">
         <slot />
       </div>
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
+      <div class="page-wrap footer-inner">
         <div>
-          <strong>Eesti Ehitusettevõtjate Liit (EEEL)</strong> ·
+          Eesti Ehitusettevõtjate Liit (EEEL) ·
           <a href="https://eeel.ee" target="_blank" rel="noopener">eeel.ee</a> ·
           <a href="mailto:eeel@eeel.ee">eeel@eeel.ee</a>
         </div>
         <div>
-          Sünkroonitud: <strong>{data.syncedAtDisplay}</strong>
+          Sünkroonitud: <span class="mono-num">{data.syncedAtDisplay}</span>
         </div>
       </div>
     </footer>

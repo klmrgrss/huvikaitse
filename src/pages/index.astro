@@ -4,27 +4,28 @@ import data from '../data/knowledge.json';
 
 const base = data.basePath || '/huvikaitse';
 const featuredTopics = data.topics.filter((t) => t.priority === 'Kõrge');
+const pv = data.pikkVaade;
+const steps = pv?.steps || [];
+const regularActions = (pv?.actions || []).filter((a) => !a.isNew);
+const klimDone = regularActions.filter((a) => a.klimCat === 'valmis').length;
+const klimTotal = regularActions.length;
+
+const gdpShares = steps.map((s) => {
+  const num = parseFloat(String(s.gdpShare).replace(',', '.').replace(/[^0-9.]/g, '')) || 0;
+  return { code: s.code, name: s.name, share: num, label: s.gdpShare };
+});
+
 const searchDocs = [
   ...data.topics.map((t) => ({
     title: t.title,
     route: `${base}${t.route}`,
-    kind: 'Teemakaart',
     group: t.workgroup,
     summary: t.summary,
     haystack: `${t.title} ${t.workgroup} ${t.summary} ${t.keyPoints.join(' ')}`.toLowerCase(),
   })),
-  ...data.analyses.map((a) => ({
-    title: a.title,
-    route: `${base}${a.route}`,
-    kind: 'Analüüs',
-    group: 'Süvaanalüüs',
-    summary: a.summary,
-    haystack: `${a.title} ${a.summary}`.toLowerCase(),
-  })),
   {
     title: 'Ehituse pikk vaade 2035 — avalik seiretöölaud ja 24 mõõdikut',
     route: `${base}/pikk-vaade-2035/`,
-    kind: 'Töölaud',
     group: 'Katuskokkulepe',
     summary: 'Ülevaade 7 suure sammu ja 39 tegevuse täitmisest ning 24 aastate lõikes jälgitavat seiremõõdikut.',
     haystack: 'ehituse pikk vaade 2035 töölaud seiremõõdikud kpi klim kontratsüklilisus solidaarvastutus kutsesüsteem',
@@ -33,121 +34,200 @@ const searchDocs = [
 ---
 
 <BaseLayout title="Avaleht" activeNav="home">
-  <section class="hero">
-    <div class="hero-kicker">Eesti Ehitusettevõtjate Liit</div>
-    <h1>EEELi seisukohad</h1>
-    <p>
-      Koondame ühte avatud vaatesse Eesti ehitusettevõtjate põhimõtted ja lahendused kvaliteetse elukeskkonna,
-      vaba ning ettevõtlust toetava majanduskeskkonna ning 18 osapoole kokkuleppe „Ehituse pikk vaade 2035“ elluviimiseks.
-    </p>
-    <div class="hero-actions">
-      <a href={`${base}/pikk-vaade-2035/`} class="btn btn-primary">Ava „Pikk vaade 2035“ töölaud →</a>
-      <a href={`${base}/teemad/`} class="btn btn-ghost">Sirvi kõiki teemasid ({data.counts.topics})</a>
+  <!-- Asymmetric opening: editorial thesis left, Tufte word-sized KPIs right -->
+  <section class="tufte-grid">
+    <div class="tufte-main">
+      <p class="kicker">Eesti Ehitusettevõtjate Liit</p>
+      <h1>EEELi seisukohad</h1>
+      <p class="lead">
+        Koondame ühte avatud vaatesse Eesti ehitusettevõtjate põhimõtted ja lahendused kvaliteetse elukeskkonna,
+        vaba ning ettevõtlust toetava majanduskeskkonna ning 18 osapoole kokkuleppe „Ehituse pikk vaade 2035“ elluviimiseks.
+      </p>
+      <div class="text-actions">
+        <a href={`${base}/pikk-vaade-2035/`} class="action-link">Ava „Pikk vaade 2035“ seiretöölaud →</a>
+        <a href={`${base}/teemad/`} class="action-link-secondary">Sirvi kõiki teemasid ({data.counts.topics}) →</a>
+      </div>
+
+      <!-- Minimal hairline search -->
+      <div class="control-bar" style="margin-top: 2rem; margin-bottom: 0;">
+        <input
+          id="home-search"
+          type="search"
+          class="tufte-input"
+          placeholder="Otsi teemat, märksõna või põhimõtet (nt planeeringud, hanked, ETÜ, kutsesüsteem, kontratsüklilisus)…"
+          aria-label="Otsi seisukohtadest"
+        />
+      </div>
+      <ul id="search-results" class="editorial-list hidden" style="margin-top: 0.75rem;"></ul>
     </div>
+
+    <aside class="tufte-margin" aria-label="Põhinäitajad">
+      <div class="margin-block">
+        <p class="margin-heading">Ülevaade arvudes</p>
+        <div class="kpi-list">
+          <div class="kpi-row">
+            <div class="kpi-head">
+              <span class="kpi-figure">{data.counts.topics}</span>
+              <span class="meta-label">valdkonnateemat</span>
+            </div>
+            <div class="kpi-caption">3 töörühma ja katuskokkulepe</div>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-head">
+              <span class="kpi-figure is-warn">
+                {klimDone}/{klimTotal}
+                <svg class="sparkbar" width="52" height="8" viewBox="0 0 52 8" aria-hidden="true">
+                  <rect x="0" y="1" width="52" height="6" fill="#eceae0" />
+                  <rect x="0" y="1" width={Math.max(3, Math.round((klimDone / Math.max(klimTotal, 1)) * 52))} height="6" fill="#2c6e49" />
+                </svg>
+              </span>
+              <span class="meta-label">KLIM 2026 valmis</span>
+            </div>
+            <div class="kpi-caption">„Pikk vaade 2035“ vaheülevaade</div>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-head">
+              <span class="kpi-figure is-alert">
+                70,9%
+                <svg class="sparkbar" width="52" height="8" viewBox="0 0 52 8" aria-hidden="true">
+                  <rect x="0" y="1" width="52" height="6" fill="#eceae0" />
+                  <rect x="0" y="1" width="37" height="6" fill="#9e2a2b" />
+                </svg>
+              </span>
+              <span class="meta-label">ellu viimata mõju</span>
+            </div>
+            <div class="kpi-caption">Kontratsükliline kava (+287 M€/a)</div>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-head">
+              <span class="kpi-figure is-ok">{data.counts.kpis}</span>
+              <span class="meta-label">seiremõõdikut</span>
+            </div>
+            <div class="kpi-caption">Sünkroonitud {data.syncedAtDisplay}</div>
+          </div>
+        </div>
+      </div>
+    </aside>
   </section>
 
-  <div class="grid-4" style="margin-bottom: 20px;">
-    <div class="kpi-tile">
-      <div class="kpi-label">Valdkonnateemasid</div>
-      <div class="kpi-val">{data.counts.topics}</div>
-      <div class="kpi-sub">põhimõtted ja lahendused</div>
-    </div>
-    <div class="kpi-tile">
-      <div class="kpi-label">Töörühmi</div>
-      <div class="kpi-val text-info">{data.counts.workgroups}</div>
-      <div class="kpi-sub">kvaliteet, elavdamine, ettevõtluskeskkond</div>
-    </div>
-    <div class="kpi-tile">
-      <div class="kpi-label">Pika vaate mõõdikuid</div>
-      <div class="kpi-val text-ok">{data.counts.kpis}</div>
-      <div class="kpi-sub">aastate lõikes jälgitavat näitajat</div>
-    </div>
-    <div class="kpi-tile">
-      <div class="kpi-label">Sünkroonitud</div>
-      <div class="kpi-val" style="font-size: 20px; padding-top: 4px;">{data.syncedAtDisplay}</div>
-      <div class="kpi-sub">viimane andmete uuendus</div>
-    </div>
-  </div>
+  <hr class="rule" />
 
-  <!-- Live instant search -->
-  <div class="filter-bar">
-    <input
-      id="home-search"
-      type="search"
-      class="search-input"
-      placeholder="Otsi teemat, märksõna või põhimõtet (nt planeeringud, väärtuspõhised hanked, ETÜ, kutsesüsteem, kontratsüklilisus)…"
-      aria-label="Otsi seisukohtadest"
-    />
-  </div>
-  <div id="search-results" class="grid-2 hidden" style="margin-bottom: 24px;"></div>
+  <!-- Pikk vaade 2035 editorial summary + margin GDP distribution sparkbars -->
+  <section class="tufte-grid">
+    <div class="tufte-main">
+      <p class="kicker">Ühiskondlik kokkulepe · 09.06.2021</p>
+      <h2 style="margin-top: 0;">Ehituse pikk vaade 2035 — avalik seiretöölaud</h2>
+      <p>
+        Vabariigi Valitsus ja 18 partnerit (linnad, ülikoolid ja erialaliidud) leppisid kokku 7 suures sammus ja
+        38 tegevuses, mille hinnanguline aastane mõju on <strong>+404,5 mln eurot</strong> ehk +1,59% SKP-st.
+        Seiretöölaud võrdleb Kliimaministeeriumi 2026. aasta vaheülevaadet tegeliku edenemisega turul ning koondab
+        24 aastate lõikes jälgitavat tuummõõdikut.
+      </p>
+      <p>
+        <a href={`${base}/pikk-vaade-2035/`} class="action-link">Vaata 7 sammu võrdlust, 39 tegevust ja 24 mõõdikut →</a>
+      </p>
+    </div>
 
-  <!-- Pikk vaade 2035 banner -->
-  <div class="card" style="border-left: 5px solid #0f2942; margin-bottom: 24px;">
-    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;">
-      <div style="flex:1 1 480px;">
-        <div class="badges" style="margin-bottom:8px;">
-          <span class="badge badge-brand">Ühiskondlik kokkulepe · 09.06.2021</span>
-          <span class="badge badge-mid">70,9% SKP mõjust ellu viimata</span>
-          <span class="badge">KLIM 2026: 4 / 39 valmis</span>
+    <aside class="tufte-margin" aria-label="SKP mõju jaotus sammude lõikes">
+      <div class="margin-block">
+        <p class="margin-heading">Hinnanguline SKP mõju osakaal (2022 mudel)</p>
+        <div class="mini-dist">
+          {gdpShares.map((g) => (
+            <div class="mini-dist-row" title={`${g.code}. ${g.name}: ${g.label}`}>
+              <span>{g.code}</span>
+              <div class="mini-dist-track">
+                <div
+                  class:list={['mini-dist-fill', { 'is-dominant': g.code === 'E2' }]}
+                  style={`width:${Math.max(2, g.share)}%`}
+                />
+              </div>
+              <span style="text-align:right;">{g.label}</span>
+            </div>
+          ))}
         </div>
-        <h2 style="margin:0 0 8px; font-size:21px; color:#0f2942;">Ehituse pikk vaade 2035 — avalik seiretöölaud</h2>
-        <p style="margin:0; color:#475569; font-size:14.5px;">
-          Võrdleme Vabariigi Valitsuse ja 18 partneri allkirjastatud kokkuleppe eesmärke senise edenemisega turul:
-          7 suurt sammu, 39 tegevuse ülevaade (sh sektori enda arengukohad) ja 24 aastate lõikes jälgitavat seiremõõdikut.
+        <p style="margin: 0.6rem 0 0; font-family: var(--font-sans); font-size: 0.78rem; color: var(--ink-muted);">
+          Samm E2 (kontratsüklilised riigi investeeringud) moodustab 70,9% kogu kokkuleppe majandusmõjust.
         </p>
       </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; align-self:center;">
-        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Vaata töölauda →</a>
-      </div>
-    </div>
-  </div>
+    </aside>
+  </section>
+
+  <hr class="rule" />
 
   <!-- 3 Töörühma -->
-  <div class="section-head">
-    <h2>EEEL-i 3 töörühma ja fookusvaldkonnad</h2>
-    <a href={`${base}/teemad/`} class="section-sub">Kõik teemad filtritega →</a>
-  </div>
-  <div class="grid-3">
-    {data.workgroups.map((wg) => {
-      const wgTopics = data.topics.filter((t) => t.workgroup === wg.title);
-      return (
-        <div class="card" style="display:flex; flex-direction:column; gap:10px;">
-          <div>
-            <span class="badge badge-brand">Töörühm</span>
-            <h3 style="margin:8px 0 6px; font-size:18px; color:#0f2942;">{wg.title}</h3>
-            <p style="margin:0; font-size:13.5px; color:#475569;">{wg.summary}</p>
+  <section class="tufte-grid">
+    <div class="tufte-main">
+      <h2 style="margin-top: 0;">Kolm töörühma ja fookusvaldkonnad</h2>
+      {data.workgroups.map((wg) => {
+        const wgTopics = data.topics.filter((t) => t.workgroup === wg.title);
+        return (
+          <div class="wg-block">
+            <h3>
+              <a href={`${base}/teemad/?toogrupp=${wg.slug}`} style="text-decoration:none;">{wg.title}</a>
+            </h3>
+            <p class="editorial-item-summary">{wg.summary}</p>
+            <ul class="wg-topics">
+              {wgTopics.map((t) => (
+                <li>
+                  <a href={`${base}${t.route}`}>{t.title}</a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul style="margin:4px 0 0; padding-left:18px; font-size:13.5px; flex:1;">
-            {wgTopics.map((t) => (
-              <li style="margin-bottom:5px;">
-                <a href={`${base}${t.route}`}>{t.title}</a>
-              </li>
-            ))}
-          </ul>
-          <a href={`${base}/teemad/?toogrupp=${wg.slug}`} style="font-size:13px; font-weight:600; margin-top:4px;">
-            Vaata töörühma teemasid ({wgTopics.length}) →
-          </a>
-        </div>
-      );
-    })}
-  </div>
+        );
+      })}
+    </div>
+
+    <aside class="tufte-margin">
+      <div class="margin-block">
+        <p class="margin-heading">Töökorraldus</p>
+        <p style="margin: 0;">
+          EEEL-i seisukohad kujunevad kolmes alalises töörühmas, mis koondavad ehitusettevõtete juhte ja
+          valdkonna praktikuid. Katusraamistikuks on ühiskondlik kokkulepe{' '}
+          <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`}>„Ehituse pikk vaade 2035“</a>.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <hr class="rule" />
 
   <!-- Peamised fookusteemad -->
-  <div class="section-head">
-    <h2>Peamised fookusteemad</h2>
-    <p class="section-sub">Valdkonna võtmepõhimõtted ja lahendused</p>
-  </div>
-  <div class="grid-2">
-    {featuredTopics.slice(0, 6).map((t) => (
-      <a href={`${base}${t.route}`} class:list={['card topic-card', { featured: t.slug.includes('pikk-vaade-2035') }]}>
-        <div class="badges">
-          <span class="badge badge-brand">{t.workgroup}</span>
-        </div>
-        <h3>{t.title}</h3>
-        <p>{t.summary}</p>
-      </a>
-    ))}
-  </div>
+  <section class="tufte-grid">
+    <div class="tufte-main">
+      <h2 style="margin-top: 0;">Peamised fookusteemad</h2>
+      <ul class="editorial-list">
+        {featuredTopics.slice(0, 6).map((t) => (
+          <li class="editorial-item">
+            <div class="editorial-item-meta">
+              <span class="small-caps">{t.workgroup}</span>
+              <span class="mono-num">{t.updated || ''}</span>
+            </div>
+            <h3 class="editorial-item-title">
+              <a href={`${base}${t.route}`}>{t.title}</a>
+            </h3>
+            <p class="editorial-item-summary">{t.summary}</p>
+          </li>
+        ))}
+      </ul>
+      <p style="margin-top: 1.25rem; font-family: var(--font-sans); font-size: 0.9rem;">
+        <a href={`${base}/teemad/`} class="action-link">Vaata kõiki {data.counts.topics} valdkonnateemat →</a>
+      </p>
+    </div>
+
+    <aside class="tufte-margin">
+      <div class="margin-block">
+        <p class="margin-heading">Aluspõhimõte</p>
+        <p style="margin: 0;">
+          Kõik seisukohad lähtuvad vaba ja ettevõtlust toetava majanduskeskkonna, ausa konkurentsi ning
+          kvaliteetse elukeskkonna põhimõttest — lahendused on suunatud kogu ühiskonna ja majanduse pikaajalisele kasule.
+        </p>
+      </div>
+    </aside>
+  </section>
 
   <script define:vars={{ searchDocs }}>
     const input = document.getElementById('home-search');
@@ -163,20 +243,19 @@ const searchDocs = [
         const hits = searchDocs.filter((d) => d.haystack.includes(q)).slice(0, 8);
         resBox.classList.remove('hidden');
         if (!hits.length) {
-          resBox.innerHTML = '<div class="card" style="grid-column:1/-1;color:#64748b;">Vasteid ei leitud. Proovi teist märksõna.</div>';
+          resBox.innerHTML = '<li class="editorial-item" style="color:var(--ink-muted);">Vasteid ei leitud. Proovi teist märksõna.</li>';
           return;
         }
         resBox.innerHTML = hits
           .map(
             (h) => `
-          <a href="${h.route}" class="card topic-card">
-            <div class="badges">
-              <span class="badge badge-info">${h.kind}</span>
-              <span class="badge">${h.group}</span>
+          <li class="editorial-item">
+            <div class="editorial-item-meta">
+              <span class="small-caps">${h.group}</span>
             </div>
-            <h3>${h.title}</h3>
-            <p>${h.summary}</p>
-          </a>`
+            <h3 class="editorial-item-title"><a href="${h.route}">${h.title}</a></h3>
+            <p class="editorial-item-summary">${h.summary}</p>
+          </li>`
           )
           .join('');
       });

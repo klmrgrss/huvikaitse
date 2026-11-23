@@ -22,34 +22,32 @@ const contentHtml = renderMarkdown(analysis.markdown);
     <span>{analysis.title}</span>
   </div>
 
-  <article class="card">
-    <div class="badges" style="margin-bottom:10px;">
-      <span class="badge badge-brand">EEEL analüüs</span>
-      {analysis.updated && <span class="badge">Kuupäev: {analysis.updated}</span>}
+  <article class="tufte-grid">
+    <div class="tufte-main">
+      <h1>{analysis.title}</h1>
+      <div class="prose" set:html={contentHtml} />
     </div>
-    <h1 style="margin:0 0 16px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
-      {analysis.title}
-    </h1>
 
-    {analysis.slug.includes('pikk-vaade-2035') && (
-      <div style="margin-bottom:18px;">
-        <a href={`${base}/pikk-vaade-2035/`} class="btn btn-navy">Ava interaktiivne „Pikk vaade 2035“ töölaud →</a>
+    <aside class="tufte-margin">
+      <div class="margin-block">
+        <p class="margin-heading">Dokument</p>
+        {analysis.updated && (
+          <p style="margin: 0; font-family: var(--font-sans); font-size: 0.82rem;">
+            Kuupäev: <span class="mono-num">{analysis.updated}</span>
+          </p>
+        )}
       </div>
-    )}
 
-    <div class="prose" set:html={contentHtml} />
-
-    {analysis.backlinks && analysis.backlinks.length > 0 && (
-      <div class="backlinks-box">
-        <h3>Seotud lehed</h3>
-        <div class="badges">
-          {analysis.backlinks.map((bl) => (
-            <a href={`${base}${bl.route}`} class="badge badge-brand" style="padding:5px 10px;">
-              ↗ {bl.title}
-            </a>
-          ))}
+      {analysis.backlinks && analysis.backlinks.length > 0 && (
+        <div class="margin-block">
+          <p class="margin-heading">Seotud teemad</p>
+          <ul class="margin-links">
+            {analysis.backlinks.map((bl) => (
+              <li><a href={`${base}${bl.route}`}>{bl.title}</a></li>
+            ))}
+          </ul>
         </div>
-      </div>
-    )}
+      )}
+    </aside>
   </article>
 </BaseLayout>
