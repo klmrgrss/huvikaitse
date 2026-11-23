@@ -80,13 +80,15 @@ def parse_frontmatter(raw: str):
 def strip_private_sections(body: str) -> str:
     # Remove Obsidian %% ... %% comments (multiline)
     body = re.sub(r"%%[\s\S]*?%%", "", body)
-    # Remove any ## Sisemärkmed or ## Sisemised märkmed section until next ## heading
-    body = re.sub(
-        r"\n##\s+Sisem(?:ised\s+)?m[äa]rkmed[\s\S]*?(?=\n##\s+|\Z)",
-        "\n",
-        body,
-        flags=re.IGNORECASE,
+    # Remove internal-only sections cleanly (loop to handle consecutive private headings)
+    priv_re = re.compile(
+        r"^##\s+(?:J[äa]rgmised\s+sammud|Tegevuslogi|Sise(?:mised\s+)?m[äa]rkmed)\b[\s\S]*?(?=^##\s+|\Z)",
+        flags=re.IGNORECASE | re.MULTILINE,
     )
+    while priv_re.search(body):
+        body = priv_re.sub("", body)
+    # Remove any stray internal Riigikogu suund bullet in public body
+    body = re.sub(r"^\s*-\s*\*\*Riigikogu suund:\*\*[^\n]*\n?", "", body, flags=re.M)
     # Remove leading Obsidian H1 + breadcrumb line (rendered cleanly by Astro header)
     body = re.sub(r"^\s*#\s+[^\n]+\n+", "", body, count=1)
     body = re.sub(r"^\s*←[^\n]+\n+", "", body, count=1)
@@ -97,17 +99,22 @@ def clean_wikilink_value(s: str) -> str:
     return re.sub(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", lambda m: m.group(2) or m.group(1), s)
 
 
-def extract_callout_bullets(body: str, callout_type: str):
+def extract_callout_lines(body: str, callout_type: str):
+    """Extract bullets or clean paragraphs from an Obsidian > [!type] callout."""
     pattern = rf"^>\s*\[!{callout_type}\][^\n]*\n((?:>[^\n]*\n?)*)"
     m = re.search(pattern, body, flags=re.M | re.I)
     if not m:
         return []
-    bullets = []
+    items = []
     for line in m.group(1).splitlines():
         line = re.sub(r"^>\s*", "", line).strip()
+        if not line:
+            continue
         if line.startswith("- "):
-            bullets.append(line[2:].strip())
-    return bullets
+            items.append(line[2:].strip())
+        else:
+            items.append(line)
+    return items
 
 
 def resolve_wikilinks(md: str, route_map: dict, source_slug: str, backlinks_acc: dict) -> str:
@@ -147,8 +154,8 @@ def convert_callouts_to_html(md: str) -> str:
     out = []
     i = 0
     type_labels = {
-        "tip": ("Kehtivad jutupunktid", "tip"),
-        "warning": ("Tähelepanu / mida me ei toeta", "warning"),
+        "tip": ("Põhiseisukoht", "tip"),
+        "warning": ("Oluline tähelepanek", "warning"),
         "important": ("Oluline", "important"),
         "info": ("Info", "info"),
         "note": ("Märkus", "note"),
@@ -396,14 +403,18 @@ def main():
     for d in docs:
         resolved_md = resolve_wikilinks(d["rawBody"], route_map, d["slug"], backlinks_acc)
         # Extract clean key points & red lines BEFORE converting callouts to HTML
-        key_points = [clean_wikilink_value(b) for b in extract_callout_bullets(d["rawBody"], "tip")]
-        red_lines = [clean_wikilink_value(b) for b in extract_callout_bullets(d["rawBody"], "warning")]
-        # Summary: first key point or first non-heading paragraph
+        key_points = [clean_wikilink_value(b) for b in extract_callout_lines(d["rawBody"], "tip")]
+        red_lines = [clean_wikilink_value(b) for b in extract_callout_lines(d["rawBody"], "warning")]
+        # Summary: first key point, or blockquote lead (for workgroups), or first non-heading paragraph
         summary = ""
         if key_points:
             summary = re.sub(r"\*\*([^*]+)\*\*", r"\1", key_points[0])
             summary = re.sub(r"\*([^*]+)\*", r"\1", summary)
-        else:
+        elif d["kind"] == "toogrupp":
+            bq_m = re.search(r"^>\s*([^\n\[].+)$", resolved_md, re.M)
+            if bq_m:
+                summary = bq_m.group(1).strip()
+        if not summary:
             for para in resolved_md.split("\n\n"):
                 p = para.strip()
                 if p and not p.startswith(("#", ">", "|", "-", "<")):

@@ -12,12 +12,12 @@ const kpis = pv?.kpis || [];
 const regularActions = actions.filter((a) => !a.isNew);
 const klimDone = regularActions.filter((a) => a.klimCat === 'valmis').length;
 const klimTotal = regularActions.length;
-const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || a.eeelCat === 'vastassuunaline').length;
+const eeelNeedsAction = regularActions.filter((a) => a.eeelCat === 'kriitiline' || a.eeelCat === 'vastassuunaline').length;
 ---
 
 <BaseLayout title="Ehituse pikk vaade 2035 — töölaud" activeNav="pikk-vaade">
   <div class="breadcrumb">
-    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Ehituse pikk vaade 2035 (töölaud)</span>
+    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Ehituse pikk vaade 2035</span>
   </div>
 
   <section class="hero">
@@ -25,14 +25,11 @@ const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || 
     <h1>Ehituse pikk vaade 2035</h1>
     <p>
       Vabariigi Valitsuse (27.04.2021) ja 18 osapoole (09.06.2021) kokkulepe 7 suure sammu ja 38 tegevuse
-      elluviimiseks. Siin võrdleme ministeeriumi vaheanalüüsi (20.01.2026) tegeliku mõjuga ehitusturul
+      elluviimiseks. Siin võrdleme Kliimaministeeriumi vaheülevaadet (20.01.2026) tegeliku mõjuga turul
       ning koondame aastate lõikes jälgitavad seiremõõdikud.
     </p>
     <div class="hero-actions">
-      {pv?.analysisRoute && (
-        <a href={`${base}${pv.analysisRoute}`} class="btn btn-primary">Loe täismahus analüüsi →</a>
-      )}
-      <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`} class="btn btn-ghost">Ava katus-teemakaart</a>
+      <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`} class="btn btn-primary">Loe kokkuleppe põhimõtteid →</a>
     </div>
   </section>
 
@@ -44,33 +41,33 @@ const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || 
       <div class="kpi-sub">allkirjastajat (VV, KOV-id, liidud, ülikoolid)</div>
     </div>
     <div class="kpi-tile">
-      <div class="kpi-label">Lubatud SKP mõju</div>
+      <div class="kpi-label">Hinnanguline SKP mõju</div>
       <div class="kpi-val text-ok">+404,5 M€</div>
       <div class="kpi-sub">+1,59% SKP / a (rakenduskulu ~60 M€)</div>
     </div>
     <div class="kpi-tile">
       <div class="kpi-label">KLIM „Valmis“ (2026)</div>
       <div class="kpi-val text-warn">{klimDone} / {klimTotal}</div>
-      <div class="kpi-sub">{Math.round((klimDone / Math.max(klimTotal, 1)) * 100)}% (peamiselt juhendid/struktuurid)</div>
+      <div class="kpi-sub">{Math.round((klimDone / Math.max(klimTotal, 1)) * 100)}% (peamiselt juhendid ja struktuurid)</div>
     </div>
     <div class="kpi-tile">
-      <div class="kpi-label">Täitmata põhimõju</div>
+      <div class="kpi-label">Ellu viimata põhimõju</div>
       <div class="kpi-val text-danger">70,9%</div>
-      <div class="kpi-sub">Tegevus 2.1 (+287 M€/a) puudub · {eeelCritical} kriitilist võlga</div>
+      <div class="kpi-sub">Tegevus 2.1 (+287 M€/a) · {eeelNeedsAction} tegevust vajab edasiviimist</div>
     </div>
   </div>
 
   <!-- 7 steps visual comparison -->
   <div class="card" style="margin-bottom: 26px;">
     <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
-      <h2 style="margin:0; font-size:19px; color:#0f2942;">7 suure sammu täitmine: KLIM enesehinnang (20.01.2026) vs EEEL faktiaudit</h2>
+      <h2 style="margin:0; font-size:19px; color:#0f2942;">7 suure sammu täitmine: KLIM vaheülevaade (20.01.2026) vs EEEL-i hinnang</h2>
       <span style="font-size:12.5px; color:#64748b;">Paremal: 2022 lõpparuande SKP mõju osakaal</span>
     </div>
     <div class="badges" style="margin-bottom: 14px;">
-      <span class="badge badge-ok">● Valmis / reaalne edasiminek</span>
+      <span class="badge badge-ok">● Valmis / sisuline edasiminek</span>
       <span class="badge badge-info">● KLIM: Töös (~50%)</span>
-      <span class="badge badge-mid">● Osaline / paberil / Alustatud</span>
-      <span class="badge badge-high">● Seisab / kriitiline võlg / vastassuunaline</span>
+      <span class="badge badge-mid">● Osaline / ettevalmistamisel</span>
+      <span class="badge badge-high">● Vajab edasiviimist / vastuolu kokkuleppega</span>
     </div>
 
     {steps.map((s) => {
@@ -96,11 +93,11 @@ const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || 
             </div>
             <span class="bar-num">{k.valmis}/{k.toos}/{k.alustatud}/{k.seisab}</span>
 
-            <span class="bar-lbl">EEEL audit</span>
+            <span class="bar-lbl">EEEL hinnang</span>
             <div class="track">
               {e.edasiminek > 0 && <div class="seg seg-ok" style={`width:${(e.edasiminek / tot) * 100}%`} title={`Edasiminek: ${e.edasiminek}`} />}
               {e.osaline > 0 && <div class="seg seg-warn" style={`width:${(e.osaline / tot) * 100}%`} title={`Osaline: ${e.osaline}`} />}
-              {e.kriitiline > 0 && <div class="seg seg-bad" style={`width:${(e.kriitiline / tot) * 100}%`} title={`Kriitiline/seisab: ${e.kriitiline}`} />}
+              {e.kriitiline > 0 && <div class="seg seg-bad" style={`width:${(e.kriitiline / tot) * 100}%`} title={`Vajab edasiviimist: ${e.kriitiline}`} />}
             </div>
             <span class="bar-num">{e.edasiminek}/{e.osaline}/{e.kriitiline}</span>
           </div>
@@ -111,7 +108,7 @@ const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || 
 
   <!-- Interactive actions matrix -->
   <div class="section-head">
-    <h2>Tegevuste täitmismaatriks</h2>
+    <h2>Tegevuste täitmise ülevaade</h2>
     <p class="section-sub">Kõigi 7 suure sammu tegevuste hetkeseis, EEEL-i hinnang ja märkused</p>
   </div>
 
@@ -124,9 +121,9 @@ const eeelCritical = regularActions.filter((a) => a.eeelCat === 'kriitiline' || 
     </div>
     <div class="chip-group" id="status-chips">
       <button class="chip active" data-status="all">Kõik seisud</button>
-      <button class="chip" data-status="kriitiline">🔴 Kriitiline / seisab</button>
-      <button class="chip" data-status="vastassuunaline">⛔ Vastassuunaline</button>
-      <button class="chip" data-status="osaline">🟡 Osaline / paberil</button>
+      <button class="chip" data-status="kriitiline">🔴 Vajab edasiviimist</button>
+      <button class="chip" data-status="vastassuunaline">⛔ Vastuolu kokkuleppega</button>
+      <button class="chip" data-status="osaline">🟡 Osaline / ettevalmistamisel</button>
       <button class="chip" data-status="edasiminek">🟢 Edasiminek</button>
     </div>
   </div>

@@ -18,28 +18,19 @@ const contentHtml = renderMarkdown(topic.markdown);
 <BaseLayout title={topic.title} description={topic.summary} activeNav="teemad">
   <div class="breadcrumb">
     <a href={`${base}/`}>Avaleht</a> <span>/</span>
-    <a href={`${base}/teemad/`}>Teemakaardid</a> <span>/</span>
+    <a href={`${base}/teemad/`}>Teemad</a> <span>/</span>
     <span>{topic.title}</span>
   </div>
 
   <article class="card">
     <div class="badges" style="margin-bottom:10px;">
       {topic.workgroup && <span class="badge badge-brand">{topic.workgroup}</span>}
-      {topic.priority === 'Kõrge' && <span class="badge badge-high">Prioriteet: Kõrge</span>}
-      {topic.priority === 'Keskmine' && <span class="badge badge-mid">Prioriteet: Keskmine</span>}
-      {topic.status && <span class="badge badge-info">{topic.status}</span>}
       {topic.updated && <span class="badge">Uuendatud: {topic.updated}</span>}
     </div>
 
-    <h1 style="margin:0 0 12px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
+    <h1 style="margin:0 0 16px; font-size:clamp(22px, 3vw, 30px); color:#0f2942; line-height:1.25;">
       {topic.title}
     </h1>
-
-    {topic.audiences && topic.audiences.length > 0 && (
-      <div style="font-size:13px; color:#64748b; margin-bottom:16px;">
-        <strong>Sihtrühmad:</strong> {topic.audiences.join(' · ')}
-      </div>
-    )}
 
     {topic.slug.includes('pikk-vaade-2035') && (
       <div style="margin-bottom:16px;">
@@ -51,7 +42,7 @@ const contentHtml = renderMarkdown(topic.markdown);
 
     {topic.backlinks && topic.backlinks.length > 0 && (
       <div class="backlinks-box">
-        <h3>Seotud lehed (tagasiviited teadmusbaasist)</h3>
+        <h3>Seotud teemad</h3>
         <div class="badges">
           {topic.backlinks.map((bl) => (
             <a href={`${base}${bl.route}`} class="badge badge-brand" style="padding:5px 10px;">
