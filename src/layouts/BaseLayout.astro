@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = 'Eesti Ehitusettevõtjate Liidu (EEEL) avalik huvikaitse, seisukohtade ja „Ehituse pikk vaade 2035“ seire teadmusportaal.',
+  description = 'Eesti Ehitusettevõtjate Liidu (EEEL) seisukohad ja „Ehituse pikk vaade 2035“ seire.',
   activeNav = 'home',
 } = Astro.props;
 
@@ -21,7 +21,7 @@ const base = data.basePath || '/huvikaitse';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} · EEEL Huvikaitse</title>
+    <title>{title === 'Avaleht' ? 'EEELi seisukohad' : `${title} · EEELi seisukohad`}</title>
     <meta name="description" content={description} />
   </head>
   <body>
@@ -29,8 +29,7 @@ const base = data.basePath || '/huvikaitse';
       <div class="container header-inner">
         <a href={`${base}/`} class="brand-link">
           <span class="brand-mark">EEEL</span>
-          <span>Huvikaitse ja teadmus</span>
-          <span class="brand-sub">· Ehitussektori seisukohad</span>
+          <span>EEELi seisukohad</span>
         </a>
         <nav class="main-nav" aria-label="Peamenüü">
           <a href={`${base}/`} class:list={['nav-link', { active: activeNav === 'home' }]}>Avaleht</a>
