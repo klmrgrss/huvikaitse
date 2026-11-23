@@ -443,11 +443,24 @@ def main():
             riigikogu = entry
         else:
             analyses.append(entry)
-            if "pikk-vaade-2035" in d["slug"]:
-                pikk_vaade_dashboard = parse_pikk_vaade_dashboard(resolved_md)
-                pikk_vaade_dashboard["analysisRoute"] = d["route"]
-                pikk_vaade_dashboard["analysisTitle"] = d["title"]
-                pikk_vaade_dashboard["updated"] = entry["updated"]
+
+    # Parse Pikk vaade 2035 structured dashboard tables directly from source file
+    # (even when the full internal analysis memo itself has veeb: "sisemine")
+    pv_source = os.path.join(
+        VAULT_DIR,
+        "Jutupunktid",
+        "2026-11-23 Analüüs — Ehituse pikk vaade 2035 täitmise kriitiline audit ja seiremõõdikud.md",
+    )
+    if os.path.isfile(pv_source):
+        with open(pv_source, "r", encoding="utf-8") as f:
+            pv_raw = f.read()
+        pv_meta, pv_body = parse_frontmatter(pv_raw)
+        pv_resolved = resolve_wikilinks(strip_private_sections(pv_body), route_map, "pikk-vaade-2035", {})
+        pikk_vaade_dashboard = parse_pikk_vaade_dashboard(pv_resolved)
+        pv_analysis_pub = next((a for a in analyses if "pikk-vaade-2035" in a["slug"]), None)
+        pikk_vaade_dashboard["analysisRoute"] = pv_analysis_pub["route"] if pv_analysis_pub else None
+        pikk_vaade_dashboard["analysisTitle"] = pv_analysis_pub["title"] if pv_analysis_pub else None
+        pikk_vaade_dashboard["updated"] = str(pv_meta.get("kuupaev") or pv_meta.get("uuendatud") or "")
 
     # Attach backlinks
     all_entries = topics + analyses + ([riigikogu] if riigikogu else [])

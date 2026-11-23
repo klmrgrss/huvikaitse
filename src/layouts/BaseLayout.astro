@@ -36,8 +36,9 @@ const base = data.basePath || '/huvikaitse';
           <a href={`${base}/`} class:list={['nav-link', { active: activeNav === 'home' }]}>Avaleht</a>
           <a href={`${base}/pikk-vaade-2035/`} class:list={['nav-link', { active: activeNav === 'pikk-vaade' }]}>Pikk vaade 2035</a>
           <a href={`${base}/teemad/`} class:list={['nav-link', { active: activeNav === 'teemad' }]}>Teemad ({data.counts.topics})</a>
-          <a href={`${base}/riigikogu/`} class:list={['nav-link', { active: activeNav === 'riigikogu' }]}>Riigikogu 6 suunda</a>
-          <a href={`${base}/analuusid/`} class:list={['nav-link', { active: activeNav === 'analuusid' }]}>Analüüsid</a>
+          {data.analyses.length > 0 && (
+            <a href={`${base}/analuusid/`} class:list={['nav-link', { active: activeNav === 'analuusid' }]}>Analüüsid</a>
+          )}
         </nav>
       </div>
     </header>
@@ -56,7 +57,7 @@ const base = data.basePath || '/huvikaitse';
           <a href="mailto:eeel@eeel.ee">eeel@eeel.ee</a>
         </div>
         <div>
-          Sünkroonitud EEEL-i teadmusbaasist (Obsidian): <strong>{data.syncedAtDisplay}</strong>
+          Sünkroonitud: <strong>{data.syncedAtDisplay}</strong>
         </div>
       </div>
     </footer>

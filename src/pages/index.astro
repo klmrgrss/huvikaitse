@@ -37,13 +37,12 @@ const searchDocs = [
     <div class="hero-kicker">Eesti Ehitusettevõtjate Liit · Avalik teadmusportaal</div>
     <h1>Ehitussektori seisukohad, analüütika ja „Pikk vaade 2035“ seire</h1>
     <p>
-      Koondame ühte avatud vaatesse EEEL-i kinnitatud huvikaitseseisukohad, 6 keskset suunda järgmisele
-      Riigikogu koosseisule ning faktipõhise seire 18 osapoole allkirjastatud kokkuleppele „Ehituse pikk vaade 2035“.
+      Koondame ühte avatud vaatesse EEEL-i huvikaitseseisukohad, töörühmade fookusteemad ning
+      faktipõhise seire 18 osapoole allkirjastatud kokkuleppele „Ehituse pikk vaade 2035“.
     </p>
     <div class="hero-actions">
       <a href={`${base}/pikk-vaade-2035/`} class="btn btn-primary">Ava „Pikk vaade 2035“ töölaud →</a>
       <a href={`${base}/teemad/`} class="btn btn-ghost">Sirvi kõiki teemakaarte ({data.counts.topics})</a>
-      <a href={`${base}/riigikogu/`} class="btn btn-ghost">6 suunda Riigikogule</a>
     </div>
   </section>
 
@@ -64,9 +63,9 @@ const searchDocs = [
       <div class="kpi-sub">aastate lõikes jälgitavat KPI-d</div>
     </div>
     <div class="kpi-tile">
-      <div class="kpi-label">Teadmuse uuendus</div>
+      <div class="kpi-label">Sünkroonitud</div>
       <div class="kpi-val" style="font-size: 20px; padding-top: 4px;">{data.syncedAtDisplay}</div>
-      <div class="kpi-sub">automaatne sünk Obsidianist</div>
+      <div class="kpi-sub">viimane andmete uuendus</div>
     </div>
   </div>
 
