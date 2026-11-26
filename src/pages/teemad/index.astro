@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import data from '../../data/knowledge.json';
+import { renderInline } from '../../lib/markdown';
 
 const base = data.basePath || '/huvikaitse';
+const site = data.site || {};
 const wgOptions = [
   { slug: 'all', label: `Kõik valdkonnad (${data.topics.length})` },
   { slug: 'ulene-koik-3-tooruhma', label: 'Ülene (Pikk vaade 2035)' },
@@ -20,10 +22,8 @@ const wgOptions = [
 
   <div class="tufte-grid">
     <div class="tufte-main">
-      <h1>EEELi seisukohad</h1>
-      <p class="lead">
-        Valdkondlikud põhimõtted, lahendused ja taustamõju kolme töörühma ning „Ehituse pika vaate 2035“ lõikes.
-      </p>
+      <h1>{site.topicsPageTitle || 'EEELi seisukohad'}</h1>
+      <p class="lead" set:html={renderInline(site.topicsPageLead || '')} />
 
       <ul class="editorial-list" id="topics-list" style="margin-top: 1.5rem;">
         {data.topics.map((t) => (
@@ -75,7 +75,7 @@ const wgOptions = [
       <div class="margin-block">
         <p class="margin-heading">Seiretöölaud</p>
         <p style="margin: 0;">
-          Kokkuleppe 7 sammu ja 24 mõõdiku võrdlus on koondatud{' '}
+          Kokkuleppe 7 sammu ja {data.counts.kpis} mõõdiku võrdlus on koondatud{' '}
           <a href={`${base}/pikk-vaade-2035/`}>„Pikk vaade 2035“ töölauale</a>.
         </p>
       </div>

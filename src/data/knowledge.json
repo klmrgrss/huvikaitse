@@ -1,7 +1,26 @@
 {
-  "syncedAtIso": "2026-11-26T10:00:04Z",
+  "syncedAtIso": "2026-11-26T10:46:33Z",
   "syncedAtDisplay": "26.11.2026",
   "basePath": "/huvikaitse",
+  "site": {
+    "name": "EEELi seisukohad",
+    "description": "Eesti Ehitusettevõtjate Liidu (EEEL) seisukohad ja „Ehituse pikk vaade 2035“ seire.",
+    "homeKicker": "Eesti Ehitusettevõtjate Liit",
+    "homeTitle": "EEELi seisukohad",
+    "homeLead": "Koondame ühte avatud vaatesse Eesti ehitusettevõtjate põhimõtted ja lahendused kvaliteetse elukeskkonna, vaba ning ettevõtlust toetava majanduskeskkonna ning 18 osapoole kokkuleppe „Ehituse pikk vaade 2035“ elluviimiseks.",
+    "homePikkVaadeKicker": "Ühiskondlik kokkulepe · 09.06.2021",
+    "homePikkVaadeTitle": "Ehituse pikk vaade 2035 — avalik seiretöölaud",
+    "homePikkVaadeBody": "Vabariigi Valitsus ja 18 partnerit (linnad, ülikoolid ja erialaliidud) leppisid kokku 7 suures sammus ja 38 tegevuses, mille hinnanguline aastane mõju on **+404,5 mln eurot** ehk +1,59% SKP-st. Seiretöölaud võrdleb Kliimaministeeriumi 2026. aasta vaheülevaadet tegeliku edenemisega turul ning koondab 24 aastate lõikes jälgitavat tuummõõdikut.",
+    "homePikkVaadeGdpNote": "Samm E2 (kontratsüklilised riigi investeeringud) moodustab 70,9% kogu kokkuleppe majandusmõjust.",
+    "homeWorkgroupsMargin": "EEEL-i seisukohad kujunevad kolmes alalises töörühmas, mis koondavad ehitusettevõtete juhte ja valdkonna praktikuid. Katusraamistikuks on ühiskondlik kokkulepe [„Ehituse pikk vaade 2035“](/huvikaitse/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/).",
+    "homeTopicsMargin": "Kõik seisukohad lähtuvad vaba ja ettevõtlust toetava majanduskeskkonna, ausa konkurentsi ning kvaliteetse elukeskkonna põhimõttest — lahendused on suunatud kogu ühiskonna ja majanduse pikaajalisele kasule.",
+    "topicsPageTitle": "EEELi seisukohad",
+    "topicsPageLead": "Valdkondlikud põhimõtted, lahendused ja taustamõju kolme töörühma ning „Ehituse pika vaate 2035“ lõikes.",
+    "footerOrg": "Eesti Ehitusettevõtjate Liit (EEEL)",
+    "footerWeb": "https://eeel.ee",
+    "footerEmail": "eeel@eeel.ee",
+    "updated": "2026-11-26"
+  },
   "counts": {
     "topics": 16,
     "workgroups": 3,
@@ -724,6 +743,69 @@
   "analyses": [],
   "riigikogu": null,
   "pikkVaade": {
+    "kicker": "Avalik seiretöölaud · 09.06.2021 ühiskondlik kokkulepe",
+    "title": "Ehituse pikk vaade 2035",
+    "lead": "Vabariigi Valitsuse (27.04.2021) ja 18 osapoole (09.06.2021) ühiskondlik kokkulepe 7 suure sammu ja 38 tegevuse elluviimiseks. Siin võrdleme Kliimaministeeriumi vaheülevaadet (20.01.2026) tegeliku mõjuga turul ning koondame aastate lõikes jälgitavad seiremõõdikud.",
+    "kpiCards": [
+      {
+        "value": "18",
+        "label": "allkirjastajat",
+        "caption": "Valitsus, linnad, liidud ja ülikoolid",
+        "colorClass": "",
+        "barPct": null,
+        "barColor": "#555555"
+      },
+      {
+        "value": "+404,5 M€",
+        "label": "SKP mõju / a",
+        "caption": "+1,59% SKP-st (rakenduskulu ~60 M€)",
+        "colorClass": "is-ok",
+        "barPct": null,
+        "barColor": "#2c6e49"
+      },
+      {
+        "value": "4/40",
+        "label": "KLIM „valmis“",
+        "caption": "10% (peamiselt juhendid ja struktuurid)",
+        "colorClass": "is-warn",
+        "barPct": 10.0,
+        "barColor": "#2c6e49"
+      },
+      {
+        "value": "70,9%",
+        "label": "ellu viimata põhimõju",
+        "caption": "Tegevus 2.1 (+287 M€/a) · 16 tegevust vajab edasiviimist",
+        "colorClass": "is-alert",
+        "barPct": 71.0,
+        "barColor": "#9e2a2b"
+      }
+    ],
+    "stepsHeading": "7 suure sammu täitmine: KLIM vaheülevaade (20.01.2026) ja EEEL-i hinnang",
+    "stepsRightLabel": "Paremal: 2022 lõpparuande SKP mõju",
+    "klimBarLabel": "KLIM 2026",
+    "eeelBarLabel": "EEEL hinnang",
+    "actionsHeading": "Tegevuste täitmise ülevaade",
+    "actionsIntro": "Kõigi 7 suure sammu tegevuste hetkeseis, EEEL-i hinnang, seotud valdkonnateemad ja märkused.",
+    "actionHeaders": [
+      "Nr",
+      "Tegevus ja kokkuleppe põhiväljund",
+      "Vastutaja (KLIM 2026)",
+      "KLIM 20.01.2026",
+      "EEEL-i hinnang ja selgitus",
+      "Seotud EEEL-i teema",
+      "Märkused"
+    ],
+    "kpisHeading": "Aastate lõikes jälgitavad seiremõõdikud",
+    "kpisIntro": "Avalikest statistikaallikatest ja 1× aastas EEEL-i liikmeküsitlusest korratav mõõdikupank.",
+    "kpiHeaders": [
+      "#",
+      "Mõõdik ja ühik",
+      "Samm",
+      "Baastase",
+      "2030 / 2035 siht ja võrdlus",
+      "Andmeallikas",
+      "Sagedus"
+    ],
     "steps": [
       {
         "code": "E1",
@@ -887,7 +969,8 @@
         "eeelAssessment": "🟡 **Osaline:** MaRu kontseptsioon (2023) ja ÜRP koostamine (kehtestamine 2026) liiguvad, kuid ühtset riigieelarvega seotud elukeskkonna tulemusvaldkonda ei ole veel loodud.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -902,7 +985,8 @@
         "eeelAssessment": "🟡 **Osaline:** põhimõtted on lisamisel EhS/PlanS ja RKAS ootustesse, kuid RES-i investeerimisotsuste siduv kriteerium ja KOV ÜP-desse jõudmine on seni ebaühtlane.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -917,7 +1001,8 @@
         "eeelAssessment": "🟡 **Ettevalmistamisel:** „Eluasemepoliitika 2025–2035“ on valmimisjärgus (4,5 a pärast kokkulepet); praktiline mõju eluaseme taskukohasusele ei ole veel avaldunud.",
         "eeelCat": "osaline",
         "related": "[Taskukohane eluase ja nõuded (sh varjumiskohad)](/huvikaitse/teemad/taskukohane-eluase-ja-nouded-sh-varjumiskohad/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -932,7 +1017,8 @@
         "eeelAssessment": "🔴 **Vajab edasiviimist:** fond on juriidiliselt loodud, kuid reaalset rahastust ja turul toimivat arendusmudelit (EIB leping alles sõlmimisel) veel ei ole.",
         "eeelCat": "kriitiline",
         "related": "[Taskukohane eluase ja nõuded (sh varjumiskohad)](/huvikaitse/teemad/taskukohane-eluase-ja-nouded-sh-varjumiskohad/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -947,7 +1033,8 @@
         "eeelAssessment": "🟡 **Osaline:** 2024–2025 koolitusprogramm on hea algus, kuid ruumiotsuste tegemisel puudub seni siduv mõjuhindamise metoodika.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -962,7 +1049,8 @@
         "eeelAssessment": "🟢/🟡 **Struktuur valmis, mõju kujunemas:** MaRu käivitus 2025 ja riigiarhitekt on ametis — vajalik samm, mille tegelikku mõju näitavad menetluste kiirenemine ja KOV-ide tugi.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -977,7 +1065,8 @@
         "eeelAssessment": "🟡 **Osaline:** digilahenduste arendus käib, kuid reaalses planeerimispraktikas domineerivad endiselt pikad ja vaidlusterohked menetlused.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -992,7 +1081,8 @@
         "eeelAssessment": "🔴 **Sektori arengukoht:** `Ehitusviga.ee` keskkond loodi, kuid ei ole aktiivses kasutuses; vajalik on toimiv ja õppimisele suunatud vigade analüüsi mudel.",
         "eeelCat": "kriitiline",
         "related": "[Tark tellija ja kvaliteetne projekt](/huvikaitse/teemad/tark-tellija-ja-kvaliteetne-projekt/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -1007,7 +1097,8 @@
         "eeelAssessment": "🔴 **Ellu viimata:** 4,5 aastaga ei ole riiklikku seire võtmenäitajate süsteemi loodud; avatud seiretöölaud aitab selle lünga täita.",
         "eeelCat": "kriitiline",
         "related": "[Ehituse pikk vaade 2035 (kokkulepe ja seire)](/huvikaitse/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 1,
@@ -1022,7 +1113,8 @@
         "eeelAssessment": "🟢 **Oluline ja toetamist vääriv algatus:** haakub otseselt müra-, parkimis-, ruumipinna- ja varjumiskohtade nõuete proportsionaalsusega.",
         "eeelCat": "edasiminek",
         "related": "[Taskukohane eluase ja nõuded (sh varjumiskohad)](/huvikaitse/teemad/taskukohane-eluase-ja-nouded-sh-varjumiskohad/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 2,
@@ -1037,7 +1129,8 @@
         "eeelAssessment": "🔴 **Keskne lahendamata eesmärk (+287 mln €/a ehk 71% kogu mõjust):** RAM-i kinnitusel eraldiseisvat kontratsüklilist plaani ei ole. Riigieelarve juhtimislauad annavad ülevaate, kuid ei loo valmisolekuplaani ega käivita majanduslanguses ettevalmistatud projekte.",
         "eeelCat": "kriitiline",
         "related": "[Kontratsüklilisus ja valmisolekuplaan](/huvikaitse/teemad/kontratsuklilisus-ja-valmisolekuplaan/), [Pikk investeerimisvaade](/huvikaitse/teemad/pikk-investeerimisvaade/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 2,
@@ -1052,7 +1145,8 @@
         "eeelAssessment": "🔴 **Vajab pikaajalist lahendust:** teehoiukava on püsirahastusega katmata (remondivõlg kasvab) ning hoonete renoveerimiskava valmib 2026. a lõpus — renoveerimisturg püsib seni hüplike toetusvoorude mõju all.",
         "eeelCat": "kriitiline",
         "related": "[Pikk investeerimisvaade](/huvikaitse/teemad/pikk-investeerimisvaade/), [Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 2,
@@ -1067,7 +1161,8 @@
         "eeelAssessment": "🟡 **Oluline suund:** toetab tervikvaadet, kui seotakse detailse kontratsüklilise valmisolekuplaani ja pikaajalise investeeringute kavaga.",
         "eeelCat": "osaline",
         "related": "[Kontratsüklilisus ja valmisolekuplaan](/huvikaitse/teemad/kontratsuklilisus-ja-valmisolekuplaan/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1082,7 +1177,8 @@
         "eeelAssessment": "🟢/🟡 **Dokument valmis, rakendus ebaühtlane:** juhend on EHR-is avaldatud, kuid vajab laiemat ja järjepidevamat rakendamist kõigi avalike tellijate (sh KOV-ide) praktikas.",
         "eeelCat": "osaline",
         "related": "[Tark tellija ja kvaliteetne projekt](/huvikaitse/teemad/tark-tellija-ja-kvaliteetne-projekt/), [Lepingud ja vastutus (ETÜ ja indekseerimine)](/huvikaitse/teemad/lepingud-ja-vastutus-etu-ja-indekseerimine/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1097,7 +1193,8 @@
         "eeelAssessment": "🟢 **Reaalne edasiminek:** TRAM, RBE ja RKAS on käivitanud esimesed alliansshanked. Oluline on hoida kvalifitseerimisnõuded proportsionaalsed, et tagada avatud ja eluterve konkurents.",
         "eeelCat": "edasiminek",
         "related": "[Väärtuspõhised hanked](/huvikaitse/teemad/vaartuspohised-hanked/), [Hanketingimused ja konkurents](/huvikaitse/teemad/hanketingimused-ja-konkurents/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1112,7 +1209,8 @@
         "eeelAssessment": "🔴 **Ootab riigi otsust:** sektor töötas välja riskide suhtes tasakaalustatud solidaarvastutuse kontseptsiooni ja konsulteeris EMTA/RAM-iga, kuid seadustamine on riigi poolel ootel. EVS 915 standardi uuendamine on kavandatud alliansshangete kogemuse põhjal.",
         "eeelCat": "kriitiline",
         "related": "[Aus konkurents ja varimajanduse pidurdamine](/huvikaitse/teemad/aus-konkurents-ja-varimajanduse-pidurdamine/), [Lepingud ja vastutus (ETÜ ja indekseerimine)](/huvikaitse/teemad/lepingud-ja-vastutus-etu-ja-indekseerimine/), [Pea- ja alltöövõtja suhted](/huvikaitse/teemad/pea-ja-alltoovotja-suhted/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1127,7 +1225,8 @@
         "eeelAssessment": "🟡 **Juhendid vs turupraktika:** strateegilised põhimõtted on avaldatud, kuid ehitushangetes domineerib endiselt madalaim hind ning ETÜ ja lepingute indekseerimine ei ole veel normiks saanud.",
         "eeelCat": "osaline",
         "related": "[Väärtuspõhised hanked](/huvikaitse/teemad/vaartuspohised-hanked/), [Hanketingimused ja konkurents](/huvikaitse/teemad/hanketingimused-ja-konkurents/), [Lepingud ja vastutus (ETÜ ja indekseerimine)](/huvikaitse/teemad/lepingud-ja-vastutus-etu-ja-indekseerimine/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1142,7 +1241,8 @@
         "eeelAssessment": "🔴 **Kitsam käsitlus kui kokku lepitud:** vaheülevaade viitab vaid töötajate registreerimisele platsil (TTKI), kuid riigihangete praktika analüüs ja ebaausate pakkujate järjepidev kõrvaldamine on seni ellu viimata.",
         "eeelCat": "kriitiline",
         "related": "[Aus konkurents ja varimajanduse pidurdamine](/huvikaitse/teemad/aus-konkurents-ja-varimajanduse-pidurdamine/), [Hanketingimused ja konkurents](/huvikaitse/teemad/hanketingimused-ja-konkurents/), [Pea- ja alltöövõtja suhted](/huvikaitse/teemad/pea-ja-alltoovotja-suhted/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1157,7 +1257,8 @@
         "eeelAssessment": "🟡 **Osaline, paralleelsete lisanõuetega:** EhS/PlanS muudatused on menetluses (oluline eesmärk: detailplaneering erandiks), kuid samal ajal lisandub uusi nõudeid (varjumiskohad, ESPR/DPP, ressursitasud), mille kogumõju vajab tasakaalustamist.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/), [Maksud ja regulatsioonid (kaevandamise maksustamine)](/huvikaitse/teemad/maksud-ja-regulatsioonid-kaevandamise-maksustamine/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1172,7 +1273,8 @@
         "eeelAssessment": "🔴 **Ellu viimata:** eraldiseisvaid tegevusi ei ole veel alustatud; väiksemad kohalikud omavalitsused vajavad endiselt süsteemset targa tellija tuge.",
         "eeelCat": "kriitiline",
         "related": "[Tark tellija ja kvaliteetne projekt](/huvikaitse/teemad/tark-tellija-ja-kvaliteetne-projekt/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 3,
@@ -1187,7 +1289,8 @@
         "eeelAssessment": "🟡 **Juhend valmis, praktiline kasutus puudub:** metoodilised materjalid on koostatud, kuid praktiline rakendamine sõltub poliitilistest investeerimisvalikutest.",
         "eeelCat": "osaline",
         "related": "[Pikk investeerimisvaade](/huvikaitse/teemad/pikk-investeerimisvaade/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1202,7 +1305,8 @@
         "eeelAssessment": "🔴 **Elluviimiskava puudub:** algne analüüs on koostatud, kuid tulemuste rakendamiseks puudub tegevuskava.",
         "eeelCat": "kriitiline",
         "related": "[Pikk investeerimisvaade](/huvikaitse/teemad/pikk-investeerimisvaade/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1217,7 +1321,8 @@
         "eeelAssessment": "🔴 **Eesmärk ja meede ei kattu:** vaheülevaade viitab riiklikele kortermajade renoveerimistoetustele, mitte KOV-ide 10-aastasele investeeringute kavandamisele ega reservimudelile.",
         "eeelCat": "kriitiline",
         "related": "[Kontratsüklilisus ja valmisolekuplaan](/huvikaitse/teemad/kontratsuklilisus-ja-valmisolekuplaan/), [Pikk investeerimisvaade](/huvikaitse/teemad/pikk-investeerimisvaade/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1232,7 +1337,8 @@
         "eeelAssessment": "🟡 **Osaline:** viide üldisele käsiraamatule ei taga veel, et kõigi ministeeriumide toetusmeetmed lähtuksid ühtselt ajakohastest üldplaneeringutest.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1247,7 +1353,8 @@
         "eeelAssessment": "🔴 **Süsteemne võrgustik puudub:** üksikute heade näidete kaardistamine ei asenda järjepidevat KOV-ide teadmiste vahetuse ja nõustamise koostöövõrgustikku.",
         "eeelCat": "kriitiline",
         "related": "[Tark tellija ja kvaliteetne projekt](/huvikaitse/teemad/tark-tellija-ja-kvaliteetne-projekt/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1262,7 +1369,8 @@
         "eeelAssessment": "🟡 **Võtmetähtsusega fookus:** MaRu ja PLANIS/PLANK arenevad, kuid praktikas ei ole detailplaneeringute menetlusajad veel märgatavalt lühenenud ega KOV-ide üldplaneeringud piisavalt ajakohased ja siduvad.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 4,
@@ -1277,7 +1385,8 @@
         "eeelAssessment": "🟡 **Asjakohane tervikvaates:** loob väärtust juhul, kui seob planeeringud, taristu ja realistlikud ehitusnõuded ühtseks kokkuleppeks (vrd Soome MAL-kokkulepped).",
         "eeelCat": "osaline",
         "related": "[Taskukohane eluase ja nõuded (sh varjumiskohad)](/huvikaitse/teemad/taskukohane-eluase-ja-nouded-sh-varjumiskohad/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 5,
@@ -1292,7 +1401,8 @@
         "eeelAssessment": "🟡 **Projektipõhine:** toetub peamiselt ajutisele LIFE IP BuildEst programmile; püsiv rahastus ja üleriigiline rakendusmudel pärast projekti lõppu vajab kokkuleppimist.",
         "eeelCat": "osaline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 5,
@@ -1307,7 +1417,8 @@
         "eeelAssessment": "🟡 **Osaline:** fookus on liikunud EL EPBD ja süsinikujalajälje piirnormidele, kuid praktiline taaskasutatud materjalide turg ja õiguskindel reeglistik (seotud tegevusega `6.5`) ei toimi veel täismahus.",
         "eeelCat": "osaline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/), [Maksud ja regulatsioonid (kaevandamise maksustamine)](/huvikaitse/teemad/maksud-ja-regulatsioonid-kaevandamise-maksustamine/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 5,
@@ -1322,7 +1433,8 @@
         "eeelAssessment": "🟢/🟡 **Tehniliselt areneb:** 3D kaksik ja e-ehitus edenevad, ent ettevõtete ja omanike igapäevakasutus ning automaatsed energiaauditid on veel varases faasis.",
         "eeelCat": "osaline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 5,
@@ -1337,7 +1449,8 @@
         "eeelAssessment": "🟡 **Töös:** EPBD nõuete ülevõtmisel on oluline, et metoodika oleks praktiline, väike- ja keskmistele ettevõtetele jõukohane ega tekitaks ebaproportsionaalset halduskoormust.",
         "eeelCat": "osaline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 5,
@@ -1352,7 +1465,8 @@
         "eeelAssessment": "🔴 **Ellu viimata:** rahvusvaheliste praktikate analüüsimise kõrval puuduvad Eesti turul toimivad püsivad finantsinstrumendid, mis aitaksid renoveerimisturul toetuste tsüklilisusest väljuda.",
         "eeelCat": "kriitiline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 6,
@@ -1367,7 +1481,8 @@
         "eeelAssessment": "🟢/🟡 **Osaline edu, skaleerimine eeldab stabiilset nõudlust:** E-hüpe (>100 projekti), puitmajade eksport ja 2025. a määruse muudatus tehaselise renoveerimise soodustamiseks on head sammud, kuid püsiva tellimusmahuta ei laiene tehaseline tootmine kogu sektorisse.",
         "eeelCat": "osaline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 6,
@@ -1382,7 +1497,8 @@
         "eeelAssessment": "🟢/🟡 **Eesti tugevaim suund:** Ehitusgiid, 3D kaksik ja BIM-load arenevad hästi; oluline on hoida andmenõuded proportsionaalsed ja kasutusväärtuspõhised (ÜBN põhimõte „igal andmel on hind“).",
         "eeelCat": "osaline",
         "related": "[Tark tellija ja kvaliteetne projekt](/huvikaitse/teemad/tark-tellija-ja-kvaliteetne-projekt/), [Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 6,
@@ -1397,7 +1513,8 @@
         "eeelAssessment": "🔴 **Ellu viimata:** ehitussektori TAI kulud on väga madalad (0,016% müügitulust) ning püsiv valdkondlik TAI rahastusmeede puudub.",
         "eeelCat": "kriitiline",
         "related": "[Haridus ja järelkasv](/huvikaitse/teemad/haridus-ja-jarelkasv/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 6,
@@ -1412,7 +1529,8 @@
         "eeelAssessment": "🟡 **Formaat olemas, seirerütm vajab tugevdamist:** komisjon käib koos, kuid tulemuslikkuse tõstmiseks on vaja regulaarset mõõdikupõhist aruandlust ja sisulist seost riigi otsustusprotsessidega.",
         "eeelCat": "osaline",
         "related": "[Ehituse pikk vaade 2035 (kokkulepe ja seire)](/huvikaitse/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 6,
@@ -1427,7 +1545,8 @@
         "eeelAssessment": "🔴 **Ellu viimata:** katsetus- ja sertifitseerimisvõimekuse puudumine pidurdab nii ringmajanduse (`5.2`) arengut kui ka Eesti ehitustoodete eksporti.",
         "eeelCat": "kriitiline",
         "related": "[Energiatõhusus, ringmajandus ja renoveerimissektor](/huvikaitse/teemad/energiatohusus-ringmajandus-ja-renoveerimissektor/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1442,7 +1561,8 @@
         "eeelAssessment": "🟡 **Analüüs olemas, lahendused ootel:** OSKA 2024 on valminud, kuid võtmeküsimused — kutsekoolide tugev matemaatika, väljalangemise vähendamine ja TechnoTLN ehitusõppe jätkusuutlikkus — vajavad sisulisi samme.",
         "eeelCat": "osaline",
         "related": "[Haridus ja järelkasv](/huvikaitse/teemad/haridus-ja-jarelkasv/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1457,7 +1577,8 @@
         "eeelAssessment": "🔴 **Sektori arengukoht:** seni ei ole tegevusi süsteemselt käivitatud; teema saab lõimida Ehitusjuht 6 ja Tööjuht 5 kutsestandardite uuendamisse ning 2026–2028 täiendkoolitustesse.",
         "eeelCat": "kriitiline",
         "related": "[Haridus ja järelkasv](/huvikaitse/teemad/haridus-ja-jarelkasv/), [Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/), [Pea- ja alltöövõtja suhted](/huvikaitse/teemad/pea-ja-alltoovotja-suhted/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1472,7 +1593,8 @@
         "eeelAssessment": "⛔ **Vastuolu kokkuleppega:** kavandatav Kutseseaduse muudatus tööturu kutsestandardite kaotamiseks ei toeta kokkulepitud kvalifikatsioonieesmärki. Kvaliteedi ja ohutuse hoidmiseks tuleb säilitada EKR 4. taseme kutse ja rakendada sektori pakutud motivatsioonimeetmeid.",
         "eeelCat": "vastassuunaline",
         "related": "[Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1487,7 +1609,8 @@
         "eeelAssessment": "🟢 **Reaalne edasiminek:** LIFE IP BuildEst raames on 2024–2025 koolitatud üle **850 ehitusspetsialisti** (programm jätkub 2026–2028) ning uuendamisel on Ehitusjuht 6 ja Tööjuht 5 kutsestandardid. Edasine fookus on püsirahastusel pärast 2028. aastat.",
         "eeelCat": "edasiminek",
         "related": "[Haridus ja järelkasv](/huvikaitse/teemad/haridus-ja-jarelkasv/), [Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1502,7 +1625,8 @@
         "eeelAssessment": "🟡 **Osaline:** töötajate registreerimine ehitusplatsil (TTKI) toimib, kuid laiemat tööjõupoliitikat ja välisriikide pädevustunnistuste läbipaistvat tunnustamist ei ole veel terviklikult lahendatud.",
         "eeelCat": "osaline",
         "related": "[Aus konkurents ja varimajanduse pidurdamine](/huvikaitse/teemad/aus-konkurents-ja-varimajanduse-pidurdamine/), [Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       },
       {
         "goalNum": 7,
@@ -1517,7 +1641,8 @@
         "eeelAssessment": "🟡 **Algfaasis (ühisvastutus):** praktika vahendamine ja motivatsiooniuuring on tehtud, kuid järgmine samm eeldab praktikantide tasude sotsiaalmaksu analüüsi ja juhendamise arvestamist kutse taastõendamisel.",
         "eeelCat": "osaline",
         "related": "[Haridus ja järelkasv](/huvikaitse/teemad/haridus-ja-jarelkasv/)",
-        "note": ""
+        "note": "",
+        "extraCells": []
       }
     ],
     "kpis": [
@@ -1529,7 +1654,17 @@
         "baseline": "84,5% / vahe 29 pp (2020)",
         "target": "**> 85% / vahe ≤ 20 pp**",
         "source": "Statistikaamet / Eesti 2035",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**1**",
+          "**Elukeskkonnaga rahulolu** (% rahul/pigem rahul; KOV detsiilide vahe pp)",
+          "E1 (`1.1`, `1.2`)",
+          "84,5% / vahe 29 pp (2020)",
+          "**> 85% / vahe ≤ 20 pp**",
+          "Statistikaamet / Eesti 2035",
+          "1× aastas"
+        ],
+        "searchText": "**1** **elukeskkonnaga rahulolu** (% rahul/pigem rahul; kov detsiilide vahe pp) e1 (`1.1`, `1.2`) 84,5% / vahe 29 pp (2020) **> 85% / vahe ≤ 20 pp** statistikaamet / eesti 2035 1× aastas"
       },
       {
         "id": "2",
@@ -1539,7 +1674,17 @@
         "baseline": "*kaardistada 2026*",
         "target": "**100%** (detailplaneering erandiks)",
         "source": "MaRu / PLANIS",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**2**",
+          "**Üldplaneeringute ajakohasus** (% KOV-idest kehtiva ≤10 a ÜP-ga)",
+          "E1 (`1.1`), E4 (`4.5`)",
+          "*kaardistada 2026*",
+          "**100%** (detailplaneering erandiks)",
+          "MaRu / PLANIS",
+          "1× aastas"
+        ],
+        "searchText": "**2** **üldplaneeringute ajakohasus** (% kov-idest kehtiva ≤10 a üp-ga) e1 (`1.1`), e4 (`4.5`) *kaardistada 2026* **100%** (detailplaneering erandiks) maru / planis 1× aastas"
       },
       {
         "id": "3",
@@ -1549,7 +1694,17 @@
         "baseline": "*baas 2021 = 100*",
         "target": "**Stabiilne / hinnasurve kontrolli all**",
         "source": "Statistikaamet / Maa- ja Ruumiamet",
-        "frequency": "Kvartaalne"
+        "frequency": "Kvartaalne",
+        "cells": [
+          "**3**",
+          "**Eluaseme kättesaadavuse ja ehitushinna indeks** (keskmise m² hind / keskmine palk + ehitushinnaindeksi muutus %)",
+          "E1 (`1.3`, uus)",
+          "*baas 2021 = 100*",
+          "**Stabiilne / hinnasurve kontrolli all**",
+          "Statistikaamet / Maa- ja Ruumiamet",
+          "Kvartaalne"
+        ],
+        "searchText": "**3** **eluaseme kättesaadavuse ja ehitushinna indeks** (keskmise m² hind / keskmine palk + ehitushinnaindeksi muutus %) e1 (`1.3`, uus) *baas 2021 = 100* **stabiilne / hinnasurve kontrolli all** statistikaamet / maa- ja ruumiamet kvartaalne"
       },
       {
         "id": "4",
@@ -1559,7 +1714,17 @@
         "baseline": "`NA` (2022)",
         "target": "**≤ 12 kuud** *(eesmärk: detailplaneering erandiks)*",
         "source": "MaRu / PLANIS / Tallinna TPR",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**4**",
+          "**Detailplaneeringu keskmine menetlusaeg** (kuudes; eraldi Tallinn/Tartu/muu Eesti)",
+          "E4 (`4.5`), E1 (`1.6`)",
+          "`NA` (2022)",
+          "**≤ 12 kuud** *(eesmärk: detailplaneering erandiks)*",
+          "MaRu / PLANIS / Tallinna TPR",
+          "1× aastas"
+        ],
+        "searchText": "**4** **detailplaneeringu keskmine menetlusaeg** (kuudes; eraldi tallinn/tartu/muu eesti) e4 (`4.5`), e1 (`1.6`) `na` (2022) **≤ 12 kuud** *(eesmärk: detailplaneering erandiks)* maru / planis / tallinna tpr 1× aastas"
       },
       {
         "id": "5",
@@ -1569,7 +1734,17 @@
         "baseline": "30 p / 10+ p *(WHO/ECSO koond: 103 p)*",
         "target": "**≤ 20 p / ≤ 10 p** *(vrd Taani 64 p, Soome 65 p)*",
         "source": "EHR / KLIM avaandmed",
-        "frequency": "Kvartaalne"
+        "frequency": "Kvartaalne",
+        "cells": [
+          "**5**",
+          "**Ehitus- ja kasutuslubade keskmine menetlusaeg** (päevades)",
+          "E4 (`4.5`), E3 (`3.6`)",
+          "30 p / 10+ p *(WHO/ECSO koond: 103 p)*",
+          "**≤ 20 p / ≤ 10 p** *(vrd Taani 64 p, Soome 65 p)*",
+          "EHR / KLIM avaandmed",
+          "Kvartaalne"
+        ],
+        "searchText": "**5** **ehitus- ja kasutuslubade keskmine menetlusaeg** (päevades) e4 (`4.5`), e3 (`3.6`) 30 p / 10+ p *(who/ecso koond: 103 p)* **≤ 20 p / ≤ 10 p** *(vrd taani 64 p, soome 65 p)* ehr / klim avaandmed kvartaalne"
       },
       {
         "id": "6",
@@ -1579,7 +1754,17 @@
         "baseline": "Protsükliline *(2007–10 maht −51,9%)*",
         "target": "**Negatiivne korrelatsioon** (languses avalik maht ↑)",
         "source": "Statistikaamet / RAM juhtimislaud",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**6**",
+          "**Avaliku sektori ehitusinvesteeringute kontratsüklilisuse indeks** (avaliku vs erasektori ehitusmahu aastamuutuse korrelatsioon; mln €)",
+          "**E2 (`2.1`)**",
+          "Protsükliline *(2007–10 maht −51,9%)*",
+          "**Negatiivne korrelatsioon** (languses avalik maht ↑)",
+          "Statistikaamet / RAM juhtimislaud",
+          "1× aastas"
+        ],
+        "searchText": "**6** **avaliku sektori ehitusinvesteeringute kontratsüklilisuse indeks** (avaliku vs erasektori ehitusmahu aastamuutuse korrelatsioon; mln €) **e2 (`2.1`)** protsükliline *(2007–10 maht −51,9%)* **negatiivne korrelatsioon** (languses avalik maht ↑) statistikaamet / ram juhtimislaud 1× aastas"
       },
       {
         "id": "7",
@@ -1589,7 +1774,17 @@
         "baseline": "*fikseerida 2026*",
         "target": "**Rahastuslünk → 0; ≥10 a siduv kava**",
         "source": "TRAM / RAM / RKAS / ESTEL",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**7**",
+          "**Pikaajalise teehoiu ja avalike hoonete rahastuslünk** (tegelik eelarve vs vajadus, mln €/a)",
+          "**E2 (`2.2`)**",
+          "*fikseerida 2026*",
+          "**Rahastuslünk → 0; ≥10 a siduv kava**",
+          "TRAM / RAM / RKAS / ESTEL",
+          "1× aastas"
+        ],
+        "searchText": "**7** **pikaajalise teehoiu ja avalike hoonete rahastuslünk** (tegelik eelarve vs vajadus, mln €/a) **e2 (`2.2`)** *fikseerida 2026* **rahastuslünk → 0; ≥10 a siduv kava** tram / ram / rkas / estel 1× aastas"
       },
       {
         "id": "8",
@@ -1599,7 +1794,17 @@
         "baseline": "Plaan puudub (0 € süsteemne reserv)",
         "target": "**Detailne kava + ≥ 150–250 mln € rulluv käivitusvalmis portfell**",
         "source": "RKAS / TRAM / RAM päring",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**8**",
+          "**Kontratsüklilise valmisolekuplaani olemasolu ja ettevalmistatud avalike projektide portfell** (plaani detailsus + käivitusvalmis maht mln € ja tk RKAS/TRAM portfellis)",
+          "**E2 (`2.1`)**",
+          "Plaan puudub (0 € süsteemne reserv)",
+          "**Detailne kava + ≥ 150–250 mln € rulluv käivitusvalmis portfell**",
+          "RKAS / TRAM / RAM päring",
+          "1× aastas"
+        ],
+        "searchText": "**8** **kontratsüklilise valmisolekuplaani olemasolu ja ettevalmistatud avalike projektide portfell** (plaani detailsus + käivitusvalmis maht mln € ja tk rkas/tram portfellis) **e2 (`2.1`)** plaan puudub (0 € süsteemne reserv) **detailne kava + ≥ 150–250 mln € rulluv käivitusvalmis portfell** rkas / tram / ram päring 1× aastas"
       },
       {
         "id": "9",
@@ -1609,7 +1814,17 @@
         "baseline": "84% *(üldine, 2020)*",
         "target": "**≤ 50% (2030)** *(vrd Soome 54%)*",
         "source": "Riigihangete register (RHR) / RAM",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**9**",
+          "**Madalaima hinna kriteeriumiga ehitus- ja projekteerimishangete osakaal** (% hangete arvust ja mahust)",
+          "**E3 (`3.4`)**",
+          "84% *(üldine, 2020)*",
+          "**≤ 50% (2030)** *(vrd Soome 54%)*",
+          "Riigihangete register (RHR) / RAM",
+          "1× aastas"
+        ],
+        "searchText": "**9** **madalaima hinna kriteeriumiga ehitus- ja projekteerimishangete osakaal** (% hangete arvust ja mahust) **e3 (`3.4`)** 84% *(üldine, 2020)* **≤ 50% (2030)** *(vrd soome 54%)* riigihangete register (rhr) / ram 1× aastas"
       },
       {
         "id": "10",
@@ -1619,7 +1834,17 @@
         "baseline": "~0% (2021)",
         "target": "**≥ 10% suurhangete mahust (2030)**",
         "source": "RHR / RKAS / TRAM / RBE",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**10**",
+          "**Koostöö- ja alliansshangete osakaal ning maht** (tk ja % avalike ehitushangete mahust)",
+          "**E3 (`3.2`, `3.4`)**",
+          "~0% (2021)",
+          "**≥ 10% suurhangete mahust (2030)**",
+          "RHR / RKAS / TRAM / RBE",
+          "1× aastas"
+        ],
+        "searchText": "**10** **koostöö- ja alliansshangete osakaal ning maht** (tk ja % avalike ehitushangete mahust) **e3 (`3.2`, `3.4`)** ~0% (2021) **≥ 10% suurhangete mahust (2030)** rhr / rkas / tram / rbe 1× aastas"
       },
       {
         "id": "11",
@@ -1629,7 +1854,17 @@
         "baseline": "*baastase 2026*",
         "target": "**≥ 80% normiks**",
         "source": "EEEL aastane liikmeküsitlus + RHR valim",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**11**",
+          "**ETÜ ja pikaajaliste lepingute indekseerimise rakendamine** (% üle 12 kuu kestvatest avalikest ehituslepingutest)",
+          "**E3 (`3.1`, `3.3`, `3.4`)**",
+          "*baastase 2026*",
+          "**≥ 80% normiks**",
+          "EEEL aastane liikmeküsitlus + RHR valim",
+          "1× aastas"
+        ],
+        "searchText": "**11** **etü ja pikaajaliste lepingute indekseerimise rakendamine** (% üle 12 kuu kestvatest avalikest ehituslepingutest) **e3 (`3.1`, `3.3`, `3.4`)** *baastase 2026* **≥ 80% normiks** eeel aastane liikmeküsitlus + rhr valim 1× aastas"
       },
       {
         "id": "12",
@@ -1639,7 +1874,17 @@
         "baseline": "*baastase 2026*",
         "target": "**≥ 4,0 / 5,0**",
         "source": "EEEL aastane liikmeküsitlus",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**12**",
+          "**Targa tellija rahuloluindeks (EEEL baromeeter)** (1–5 skaala: lähteülesande kvaliteet, projektidokumentatsioon, lisatööde kord — eraldi RKAS, RKIK, TRAM, Tallinn, muud KOV-id)",
+          "**E3 (`3.1`, `3.7`), E4 (`4.4`)**",
+          "*baastase 2026*",
+          "**≥ 4,0 / 5,0**",
+          "EEEL aastane liikmeküsitlus",
+          "1× aastas"
+        ],
+        "searchText": "**12** **targa tellija rahuloluindeks (eeel baromeeter)** (1–5 skaala: lähteülesande kvaliteet, projektidokumentatsioon, lisatööde kord — eraldi rkas, rkik, tram, tallinn, muud kov-id) **e3 (`3.1`, `3.7`), e4 (`4.4`)** *baastase 2026* **≥ 4,0 / 5,0** eeel aastane liikmeküsitlus 1× aastas"
       },
       {
         "id": "13",
@@ -1649,7 +1894,17 @@
         "baseline": "25% *(EPV 2022)*",
         "target": "**< 10% (2030), < 5% (2035)**",
         "source": "EMTA varimajanduse/ümbrikupalga aruanne + EKI",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**13**",
+          "**Halli majanduse / varimajanduse hinnanguline osakaal ja maksukahju ehituses** (% ja mln €/a)",
+          "**E3 (`3.3`, `3.5`), E7 (`7.5`)**",
+          "25% *(EPV 2022)*",
+          "**< 10% (2030), < 5% (2035)**",
+          "EMTA varimajanduse/ümbrikupalga aruanne + EKI",
+          "1× aastas"
+        ],
+        "searchText": "**13** **halli majanduse / varimajanduse hinnanguline osakaal ja maksukahju ehituses** (% ja mln €/a) **e3 (`3.3`, `3.5`), e7 (`7.5`)** 25% *(epv 2022)* **< 10% (2030), < 5% (2035)** emta varimajanduse/ümbrikupalga aruanne + eki 1× aastas"
       },
       {
         "id": "14",
@@ -1659,7 +1914,17 @@
         "baseline": "TTKI käivitatud 2023; solidaarvastutus 0",
         "target": "**Solidaarvastutus seadustatud; rikkumised ↓**",
         "source": "EMTA statistika",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**14**",
+          "**Töötajate registreerimise (TTKI) rikkumiste ja solidaarvastutuse seis** (TTKI kontrollide rikkumiste % + õigusakti staatus)",
+          "**E3 (`3.3`, `3.5`), E7 (`7.5`)**",
+          "TTKI käivitatud 2023; solidaarvastutus 0",
+          "**Solidaarvastutus seadustatud; rikkumised ↓**",
+          "EMTA statistika",
+          "1× aastas"
+        ],
+        "searchText": "**14** **töötajate registreerimise (ttki) rikkumiste ja solidaarvastutuse seis** (ttki kontrollide rikkumiste % + õigusakti staatus) **e3 (`3.3`, `3.5`), e7 (`7.5`)** ttki käivitatud 2023; solidaarvastutus 0 **solidaarvastutus seadustatud; rikkumised ↓** emta statistika 1× aastas"
       },
       {
         "id": "15",
@@ -1669,7 +1934,17 @@
         "baseline": "*baas 2021–2025*",
         "target": "**25% (2030), 60% (2040)** + ühtlane aastavoog (ilma „toetuste lõksuta“)",
         "source": "EIS/KredEx + EHR + KLIM",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**15**",
+          "**Hoonete tervikrekonstrueerimise aastamaht ja stabiilsus** (renoveeritud m² ja hoonete % C-klassi sihist + aastane kõikumine %)",
+          "**E5 (`5.1`, `5.5`), E2 (`2.2`)**",
+          "*baas 2021–2025*",
+          "**25% (2030), 60% (2040)** + ühtlane aastavoog (ilma „toetuste lõksuta“)",
+          "EIS/KredEx + EHR + KLIM",
+          "1× aastas"
+        ],
+        "searchText": "**15** **hoonete tervikrekonstrueerimise aastamaht ja stabiilsus** (renoveeritud m² ja hoonete % c-klassi sihist + aastane kõikumine %) **e5 (`5.1`, `5.5`), e2 (`2.2`)** *baas 2021–2025* **25% (2030), 60% (2040)** + ühtlane aastavoog (ilma „toetuste lõksuta“) eis/kredex + ehr + klim 1× aastas"
       },
       {
         "id": "16",
@@ -1679,7 +1954,17 @@
         "baseline": "8,7% *(kogu majanduse CMUR, 2018)*",
         "target": "**≥ 70% ehitusjäätmete taaskasutus** *(vrd Austria 84%/55%)*",
         "source": "Keskkonnaagentuur / Eurostat",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**16**",
+          "**Ringlusse võetud ehitus- ja lammutusjäätmete määr** (% tegelikust materjalina ringlussevõtust, eraldi täitematerjalist)",
+          "**E5 (`5.2`)**",
+          "8,7% *(kogu majanduse CMUR, 2018)*",
+          "**≥ 70% ehitusjäätmete taaskasutus** *(vrd Austria 84%/55%)*",
+          "Keskkonnaagentuur / Eurostat",
+          "1× aastas"
+        ],
+        "searchText": "**16** **ringlusse võetud ehitus- ja lammutusjäätmete määr** (% tegelikust materjalina ringlussevõtust, eraldi täitematerjalist) **e5 (`5.2`)** 8,7% *(kogu majanduse cmur, 2018)* **≥ 70% ehitusjäätmete taaskasutus** *(vrd austria 84%/55%)* keskkonnaagentuur / eurostat 1× aastas"
       },
       {
         "id": "17",
@@ -1689,7 +1974,17 @@
         "baseline": "29 500 € (~50% EL-ist, 2017)",
         "target": "**≥ 85% EL keskmisest (2030), ≥ 100% (2035)**",
         "source": "Statistikaamet / Eurostat (`sts_copr_a` / `sts_colb_a`, SBS)",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**17**",
+          "**Ehitussektori tööviljakus (lisandväärtus töötaja ja töötunni kohta)** (€/töötaja ja % EL-i keskmisest)",
+          "**E6 (visioon)**",
+          "29 500 € (~50% EL-ist, 2017)",
+          "**≥ 85% EL keskmisest (2030), ≥ 100% (2035)**",
+          "Statistikaamet / Eurostat (`sts_copr_a` / `sts_colb_a`, SBS)",
+          "1× aastas"
+        ],
+        "searchText": "**17** **ehitussektori tööviljakus (lisandväärtus töötaja ja töötunni kohta)** (€/töötaja ja % el-i keskmisest) **e6 (visioon)** 29 500 € (~50% el-ist, 2017) **≥ 85% el keskmisest (2030), ≥ 100% (2035)** statistikaamet / eurostat (`sts_copr_a` / `sts_colb_a`, sbs) 1× aastas"
       },
       {
         "id": "18",
@@ -1699,7 +1994,17 @@
         "baseline": "TAI 0,016% (2016); BIM-load `NA`",
         "target": "**TAI ≥ 0,5%; BIM-load avalikes uushoonetes 100%**",
         "source": "Statistikaamet + EHR / MaRu",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**18**",
+          "**Ehitussektori TAI kulud (% müügitulust) ja digitaalsed / BIM-põhised ehitusload (% lubadest)**",
+          "**E6 (`6.2`, `6.3`)**",
+          "TAI 0,016% (2016); BIM-load `NA`",
+          "**TAI ≥ 0,5%; BIM-load avalikes uushoonetes 100%**",
+          "Statistikaamet + EHR / MaRu",
+          "1× aastas"
+        ],
+        "searchText": "**18** **ehitussektori tai kulud (% müügitulust) ja digitaalsed / bim-põhised ehitusload (% lubadest)** **e6 (`6.2`, `6.3`)** tai 0,016% (2016); bim-load `na` **tai ≥ 0,5%; bim-load avalikes uushoonetes 100%** statistikaamet + ehr / maru 1× aastas"
       },
       {
         "id": "19",
@@ -1709,7 +2014,17 @@
         "baseline": "Teenuste eksport 418 mln € / tooted 875 mln € (2017)",
         "target": "**Kasv +50% (vrd UK siht); sertifitseerimisvõimekus loodud**",
         "source": "Statistikaamet / Eesti Pank / Puitmajaliit",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**19**",
+          "**Tehaselise tootmise ja ehitusteenuste/-toodete ekspordi maht** (mln €/a ja % müügitulust)",
+          "**E6 (`6.1`, `6.5`)**",
+          "Teenuste eksport 418 mln € / tooted 875 mln € (2017)",
+          "**Kasv +50% (vrd UK siht); sertifitseerimisvõimekus loodud**",
+          "Statistikaamet / Eesti Pank / Puitmajaliit",
+          "1× aastas"
+        ],
+        "searchText": "**19** **tehaselise tootmise ja ehitusteenuste/-toodete ekspordi maht** (mln €/a ja % müügitulust) **e6 (`6.1`, `6.5`)** teenuste eksport 418 mln € / tooted 875 mln € (2017) **kasv +50% (vrd uk siht); sertifitseerimisvõimekus loodud** statistikaamet / eesti pank / puitmajaliit 1× aastas"
       },
       {
         "id": "20",
@@ -1719,7 +2034,17 @@
         "baseline": "Tööjõupuudus 69% (2016)",
         "target": "**Tasakaalustatud kõikumine** *(väiksem volatiilsus)*",
         "source": "Eesti Konjunktuuriinstituut (EKI)",
-        "frequency": "Kvartaalne"
+        "frequency": "Kvartaalne",
+        "cells": [
+          "**20**",
+          "**Ehitusettevõtete kindlustunne ja peamised piiravad tegurid** (EKI indikaator; % ettevõtteid, keda piirab nõudlus vs tööjõupuudus)",
+          "**E2 (`2.1`), E6, E7**",
+          "Tööjõupuudus 69% (2016)",
+          "**Tasakaalustatud kõikumine** *(väiksem volatiilsus)*",
+          "Eesti Konjunktuuriinstituut (EKI)",
+          "Kvartaalne"
+        ],
+        "searchText": "**20** **ehitusettevõtete kindlustunne ja peamised piiravad tegurid** (eki indikaator; % ettevõtteid, keda piirab nõudlus vs tööjõupuudus) **e2 (`2.1`), e6, e7** tööjõupuudus 69% (2016) **tasakaalustatud kõikumine** *(väiksem volatiilsus)* eesti konjunktuuriinstituut (eki) kvartaalne"
       },
       {
         "id": "21",
@@ -1729,7 +2054,17 @@
         "baseline": "*baas Haridussilm 2020–2025*",
         "target": "**Väljalangemine ↓ 25%; inseneride järelkasv ↑ (OSKA siht)**",
         "source": "Haridussilm / HTM / OSKA",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**21**",
+          "**Ehitusvaldkonna kutse- ja kõrghariduse vastuvõtt, lõpetajad ja väljalangemise määr** (arv ja %, sh kutseõppest kõrgkooli siirdujad)",
+          "**E7 (`7.1`)**",
+          "*baas Haridussilm 2020–2025*",
+          "**Väljalangemine ↓ 25%; inseneride järelkasv ↑ (OSKA siht)**",
+          "Haridussilm / HTM / OSKA",
+          "1× aastas"
+        ],
+        "searchText": "**21** **ehitusvaldkonna kutse- ja kõrghariduse vastuvõtt, lõpetajad ja väljalangemise määr** (arv ja %, sh kutseõppest kõrgkooli siirdujad) **e7 (`7.1`)** *baas haridussilm 2020–2025* **väljalangemine ↓ 25%; inseneride järelkasv ↑ (oska siht)** haridussilm / htm / oska 1× aastas"
       },
       {
         "id": "22",
@@ -1739,7 +2074,17 @@
         "baseline": "*Kutseregister 2021 baas*",
         "target": "**Kasvav trend kõigil tasemetel; EKR 4 säilitatud**",
         "source": "SA Kutsekoda (Kutseregister) / EEEL",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**22**",
+          "**Kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi EKR 3–4 oskustöölised, Tööjuht 5, Ehitusjuht 6, Insener 6–8)",
+          "**E7 (`7.3`, `7.4`)**",
+          "*Kutseregister 2021 baas*",
+          "**Kasvav trend kõigil tasemetel; EKR 4 säilitatud**",
+          "SA Kutsekoda (Kutseregister) / EEEL",
+          "1× aastas"
+        ],
+        "searchText": "**22** **kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi ekr 3–4 oskustöölised, tööjuht 5, ehitusjuht 6, insener 6–8) **e7 (`7.3`, `7.4`)** *kutseregister 2021 baas* **kasvav trend kõigil tasemetel; ekr 4 säilitatud** sa kutsekoda (kutseregister) / eeel 1× aastas"
       },
       {
         "id": "23",
@@ -1749,7 +2094,17 @@
         "baseline": "BuildEst 2024–2025: >850 spetsialisti",
         "target": "**≥ 1 000 spetsialisti/a püsirahastusega pärast 2028**",
         "source": "EEEL / TalTech / TTK / BuildEst",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**23**",
+          "**Täiendkoolitustel osalenud ehitusspetsialistide arv ja teemade kate (sh juhtimine/koostöö `7.2`)**",
+          "**E7 (`7.2`, `7.4`)**",
+          "BuildEst 2024–2025: >850 spetsialisti",
+          "**≥ 1 000 spetsialisti/a püsirahastusega pärast 2028**",
+          "EEEL / TalTech / TTK / BuildEst",
+          "1× aastas"
+        ],
+        "searchText": "**23** **täiendkoolitustel osalenud ehitusspetsialistide arv ja teemade kate (sh juhtimine/koostöö `7.2`)** **e7 (`7.2`, `7.4`)** buildest 2024–2025: >850 spetsialisti **≥ 1 000 spetsialisti/a püsirahastusega pärast 2028** eeel / taltech / ttk / buildest 1× aastas"
       },
       {
         "id": "24",
@@ -1759,11 +2114,20 @@
         "baseline": "*fikseerida 2026*",
         "target": "**Kasv +30%; motivatsioonimeede (maksusoodustus) rakendatud**",
         "source": "HTM / kutse- ja kõrgkoolid / EEEL küsitlus",
-        "frequency": "1× aastas"
+        "frequency": "1× aastas",
+        "cells": [
+          "**24**",
+          "**Ehituserialade praktikakohtade pakkumine ja praktikantide arv ettevõtetes** (tk/a + ettevõtete hinnang takistustele)",
+          "**E7 (`7.6`)**",
+          "*fikseerida 2026*",
+          "**Kasv +30%; motivatsioonimeede (maksusoodustus) rakendatud**",
+          "HTM / kutse- ja kõrgkoolid / EEEL küsitlus",
+          "1× aastas"
+        ],
+        "searchText": "**24** **ehituserialade praktikakohtade pakkumine ja praktikantide arv ettevõtetes** (tk/a + ettevõtete hinnang takistustele) **e7 (`7.6`)** *fikseerida 2026* **kasv +30%; motivatsioonimeede (maksusoodustus) rakendatud** htm / kutse- ja kõrgkoolid / eeel küsitlus 1× aastas"
       }
     ],
-    "analysisRoute": null,
-    "analysisTitle": null,
-    "updated": "2026-11-23"
+    "extraSections": [],
+    "updated": "2026-11-26"
   }
 }

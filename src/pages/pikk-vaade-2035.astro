@@ -1,20 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import data from '../data/knowledge.json';
-import { renderInline } from '../lib/markdown';
+import { renderInline, renderMarkdown } from '../lib/markdown';
 
 const base = data.basePath || '/huvikaitse';
-const pv = data.pikkVaade;
-const steps = pv?.steps || [];
-const actions = pv?.actions || [];
-const kpis = pv?.kpis || [];
+const pv = data.pikkVaade || {};
+const steps = pv.steps || [];
+const actions = pv.actions || [];
+const kpis = pv.kpis || [];
+const kpiCards = pv.kpiCards || [];
+const extraSections = pv.extraSections || [];
 
-const regularActions = actions.filter((a) => !a.isNew);
-const klimDone = regularActions.filter((a) => a.klimCat === 'valmis').length;
-const klimTotal = regularActions.length;
-const eeelNeedsAction = regularActions.filter(
-  (a) => a.eeelCat === 'kriitiline' || a.eeelCat === 'vastassuunaline'
-).length;
+const actionHeaders =
+  pv.actionHeaders && pv.actionHeaders.length >= 6
+    ? pv.actionHeaders
+    : ['Nr', 'Tegevus ja põhiväljund', 'Vastutaja', 'KLIM 2026', 'EEEL-i hinnang ja selgitus', 'Seotud teema', 'Märkused'];
+const extraActionHeaders = actionHeaders.slice(7);
+
+const kpiHeaders =
+  pv.kpiHeaders && pv.kpiHeaders.length >= 2
+    ? pv.kpiHeaders
+    : ['#', 'Mõõdik ja ühik', 'Samm', 'Baastase', '2030 / 2035 siht ja võrdlus', 'Andmeallikas', 'Sagedus'];
 
 function formatAssessment(md: string): string {
   const html = renderInline(md);
@@ -25,29 +31,35 @@ function formatAssessment(md: string): string {
     .replace(/🔴\s*/g, '<span class="dot dot-alert" title="Vajab edasiviimist">●</span>')
     .replace(/⛔\s*/g, '<span class="dot dot-conflict" title="Vastuolu kokkuleppega">◆</span>');
 }
+
+function kpiCellClass(header: string, idx: number): string {
+  const h = header.toLowerCase();
+  if (idx === 0 || h === '#') return 'num-col';
+  if (h.includes('samm') || h.includes('allikas') || h.includes('sagedus')) return 'status-col';
+  return '';
+}
 ---
 
-<BaseLayout title="Ehituse pikk vaade 2035 — seiretöölaud" activeNav="pikk-vaade">
+<BaseLayout title={`${pv.title || 'Ehituse pikk vaade 2035'} — seiretöölaud`} activeNav="pikk-vaade">
   <div class="breadcrumb">
-    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>Ehituse pikk vaade 2035</span>
+    <a href={`${base}/`}>Avaleht</a> <span>/</span> <span>{pv.title || 'Ehituse pikk vaade 2035'}</span>
   </div>
 
-  <!-- Asymmetric intro + Tufte word-sized KPI margin -->
+  <!-- Asymmetric intro + Tufte word-sized KPI margin (100% driven by Obsidian Veeb/) -->
   <section class="tufte-grid">
     <div class="tufte-main">
-      <p class="kicker">Avalik seiretöölaud · 09.06.2021 ühiskondlik kokkulepe</p>
-      <h1>Ehituse pikk vaade 2035</h1>
-      <p class="lead">
-        Vabariigi Valitsuse (27.04.2021) ja 18 osapoole (09.06.2021) ühiskondlik kokkulepe 7 suure sammu ja
-        38 tegevuse elluviimiseks. Siin võrdleme Kliimaministeeriumi vaheülevaadet (20.01.2026) tegeliku
-        mõjuga turul ning koondame aastate lõikes jälgitavad seiremõõdikud.
-      </p>
+      <p class="kicker">{pv.kicker || 'Avalik seiretöölaud · 09.06.2021 ühiskondlik kokkulepe'}</p>
+      <h1>{pv.title || 'Ehituse pikk vaade 2035'}</h1>
+      <p class="lead" set:html={renderInline(pv.lead || '')} />
       <div class="text-actions">
         <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`} class="action-link">
           Loe kokkuleppe põhimõtteid →
         </a>
         <a href="#tegevused" class="action-link-secondary">Tegevuste ülevaade ({actions.length}) ↓</a>
         <a href="#moodikud" class="action-link-secondary">Seiremõõdikud ({kpis.length}) ↓</a>
+        {extraSections.map((sec) => (
+          <a href={`#${sec.id}`} class="action-link-secondary">{sec.heading} ↓</a>
+        ))}
       </div>
     </div>
 
@@ -55,49 +67,29 @@ function formatAssessment(md: string): string {
       <div class="margin-block">
         <p class="margin-heading">Kokkuleppe võtmenäitajad</p>
         <div class="kpi-list">
-          <div class="kpi-row">
-            <div class="kpi-head">
-              <span class="kpi-figure">18</span>
-              <span class="meta-label">allkirjastajat</span>
+          {kpiCards.map((c) => (
+            <div class="kpi-row">
+              <div class="kpi-head">
+                <span class:list={['kpi-figure', c.colorClass]}>
+                  {c.value}
+                  {c.barPct !== null && c.barPct !== undefined && (
+                    <svg class="sparkbar" width="52" height="8" viewBox="0 0 52 8" aria-hidden="true">
+                      <rect x="0" y="1" width="52" height="6" fill="#eceae0" />
+                      <rect
+                        x="0"
+                        y="1"
+                        width={Math.max(3, Math.round((c.barPct / 100) * 52))}
+                        height="6"
+                        fill={c.barColor || '#555555'}
+                      />
+                    </svg>
+                  )}
+                </span>
+                <span class="meta-label">{c.label}</span>
+              </div>
+              {c.caption && <div class="kpi-caption" set:html={renderInline(c.caption)} />}
             </div>
-            <div class="kpi-caption">Valitsus, linnad, liidud ja ülikoolid</div>
-          </div>
-
-          <div class="kpi-row">
-            <div class="kpi-head">
-              <span class="kpi-figure is-ok">+404,5 M€</span>
-              <span class="meta-label">SKP mõju / a</span>
-            </div>
-            <div class="kpi-caption">+1,59% SKP-st (rakenduskulu ~60 M€)</div>
-          </div>
-
-          <div class="kpi-row">
-            <div class="kpi-head">
-              <span class="kpi-figure is-warn">
-                {klimDone}/{klimTotal}
-                <svg class="sparkbar" width="52" height="8" viewBox="0 0 52 8" aria-hidden="true">
-                  <rect x="0" y="1" width="52" height="6" fill="#eceae0" />
-                  <rect x="0" y="1" width={Math.max(3, Math.round((klimDone / Math.max(klimTotal, 1)) * 52))} height="6" fill="#2c6e49" />
-                </svg>
-              </span>
-              <span class="meta-label">KLIM „valmis“</span>
-            </div>
-            <div class="kpi-caption">{Math.round((klimDone / Math.max(klimTotal, 1)) * 100)}% (peamiselt juhendid ja struktuurid)</div>
-          </div>
-
-          <div class="kpi-row">
-            <div class="kpi-head">
-              <span class="kpi-figure is-alert">
-                70,9%
-                <svg class="sparkbar" width="52" height="8" viewBox="0 0 52 8" aria-hidden="true">
-                  <rect x="0" y="1" width="52" height="6" fill="#eceae0" />
-                  <rect x="0" y="1" width="37" height="6" fill="#9e2a2b" />
-                </svg>
-              </span>
-              <span class="meta-label">ellu viimata põhimõju</span>
-            </div>
-            <div class="kpi-caption">Tegevus 2.1 (+287 M€/a) · {eeelNeedsAction} tegevust vajab edasiviimist</div>
-          </div>
+          ))}
         </div>
       </div>
     </aside>
@@ -108,8 +100,8 @@ function formatAssessment(md: string): string {
   <!-- Full-width High Data-Ink 7-Step Comparison Figure -->
   <section aria-labelledby="steps-heading">
     <div class="figure-head">
-      <h2 id="steps-heading">7 suure sammu täitmine: KLIM vaheülevaade (20.01.2026) ja EEEL-i hinnang</h2>
-      <span class="meta-label">Paremal: 2022 lõpparuande SKP mõju</span>
+      <h2 id="steps-heading">{pv.stepsHeading || '7 suure sammu täitmine'}</h2>
+      {pv.stepsRightLabel && <span class="meta-label">{pv.stepsRightLabel}</span>}
     </div>
 
     <div class="figure-legend">
@@ -132,7 +124,7 @@ function formatAssessment(md: string): string {
           </div>
 
           <div class="step-bars">
-            <span class="bar-lbl">KLIM 2026</span>
+            <span class="bar-lbl">{pv.klimBarLabel || 'KLIM 2026'}</span>
             <div class="bar-track" aria-label={`KLIM: ${k.valmis} valmis, ${k.toos} töös, ${k.alustatud} alustatud, ${k.seisab} seisab`}>
               {k.valmis > 0 && <div class="seg seg-ok" style={`width:${(k.valmis / tot) * 100}%`} />}
               {k.toos > 0 && <div class="seg seg-mid" style={`width:${(k.toos / tot) * 100}%`} />}
@@ -141,7 +133,7 @@ function formatAssessment(md: string): string {
             </div>
             <span class="bar-num">{k.valmis}/{k.toos}/{k.alustatud}/{k.seisab}</span>
 
-            <span class="bar-lbl">EEEL hinnang</span>
+            <span class="bar-lbl">{pv.eeelBarLabel || 'EEEL hinnang'}</span>
             <div class="bar-track" aria-label={`EEEL: ${e.edasiminek} edasiminek, ${e.osaline} osaline, ${e.kriitiline} vajab edasiviimist`}>
               {e.edasiminek > 0 && <div class="seg seg-ok" style={`width:${(e.edasiminek / tot) * 100}%`} />}
               {e.osaline > 0 && <div class="seg seg-warn" style={`width:${(e.osaline / tot) * 100}%`} />}
@@ -161,10 +153,10 @@ function formatAssessment(md: string): string {
 
   <!-- Full-width Booktabs Actions Matrix -->
   <section id="tegevused" style="margin-top: 3rem;">
-    <h2 style="margin-top: 0; margin-bottom: 0.35rem;">Tegevuste täitmise ülevaade</h2>
-    <p style="color: var(--ink-secondary); margin: 0 0 1rem; font-size: 0.98rem;">
-      Kõigi 7 suure sammu tegevuste hetkeseis, EEEL-i hinnang, seotud valdkonnateemad ja märkused.
-    </p>
+    <h2 style="margin-top: 0; margin-bottom: 0.35rem;">{pv.actionsHeading || 'Tegevuste täitmise ülevaade'}</h2>
+    {pv.actionsIntro && (
+      <p style="color: var(--ink-secondary); margin: 0 0 1rem; font-size: 0.98rem;" set:html={renderInline(pv.actionsIntro)} />
+    )}
 
     <div class="control-bar-inline">
       <div class="toggle-group" id="step-toggles" aria-label="Filtreeri sammu järgi">
@@ -187,13 +179,16 @@ function formatAssessment(md: string): string {
       <table id="actions-table">
         <thead>
           <tr>
-            <th style="width:6%">Nr</th>
-            <th style="width:22%">Tegevus ja põhiväljund</th>
-            <th style="width:10%">Vastutaja</th>
-            <th style="width:11%">KLIM 2026</th>
-            <th style="width:30%">EEEL-i hinnang ja selgitus</th>
-            <th style="width:13%">Seotud teema</th>
-            <th style="width:8%">Märkused</th>
+            <th style="width:6%">{actionHeaders[0] || 'Nr'}</th>
+            <th style="width:22%">{actionHeaders[1] || 'Tegevus ja põhiväljund'}</th>
+            <th style="width:10%">{actionHeaders[2] || 'Vastutaja'}</th>
+            <th style="width:11%">{actionHeaders[3] || 'KLIM 2026'}</th>
+            <th style="width:30%">{actionHeaders[4] || 'EEEL-i hinnang ja selgitus'}</th>
+            <th style="width:13%">{actionHeaders[5] || 'Seotud teema'}</th>
+            <th style="width:8%">{actionHeaders[6] || 'Märkused'}</th>
+            {extraActionHeaders.map((h) => (
+              <th>{h}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -206,6 +201,9 @@ function formatAssessment(md: string): string {
               <td set:html={formatAssessment(a.eeelAssessment)} />
               <td set:html={renderInline(a.related)} />
               <td set:html={renderInline(a.note || '—')} />
+              {extraActionHeaders.map((_, idx) => (
+                <td set:html={renderInline((a.extraCells && a.extraCells[idx]) || '—')} />
+              ))}
             </tr>
           ))}
         </tbody>
@@ -213,14 +211,14 @@ function formatAssessment(md: string): string {
     </div>
   </section>
 
-  <!-- Full-width Booktabs 24 KPI Monitoring Registry -->
+  <!-- Full-width Dynamic-Column KPI Monitoring Registry -->
   <section id="moodikud" style="margin-top: 3rem;">
     <h2 style="margin-top: 0; margin-bottom: 0.35rem;">
-      Aastate lõikes jälgitavad seiremõõdikud ({kpis.length} tuummõõdikut)
+      {pv.kpisHeading || 'Aastate lõikes jälgitavad seiremõõdikud'} ({kpis.length})
     </h2>
-    <p style="color: var(--ink-secondary); margin: 0 0 1rem; font-size: 0.98rem;">
-      Avalikest statistikaallikatest ja 1× aastas EEEL-i liikmeküsitlusest korratav mõõdikupank.
-    </p>
+    {pv.kpisIntro && (
+      <p style="color: var(--ink-secondary); margin: 0 0 1rem; font-size: 0.98rem;" set:html={renderInline(pv.kpisIntro)} />
+    )}
 
     <div class="control-bar-inline">
       <input
@@ -243,31 +241,51 @@ function formatAssessment(md: string): string {
       <table id="kpi-table">
         <thead>
           <tr>
-            <th style="width:4%; text-align:right;">#</th>
-            <th style="width:27%">Mõõdik ja ühik</th>
-            <th style="width:10%">Samm</th>
-            <th style="width:16%">Baastase</th>
-            <th style="width:22%">2030 / 2035 siht ja võrdlus</th>
-            <th style="width:14%">Andmeallikas</th>
-            <th style="width:7%">Sagedus</th>
+            {kpiHeaders.map((h, idx) => (
+              <th style={idx === 0 ? 'width:4%; text-align:right;' : undefined}>{h}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {kpis.map((k) => (
-            <tr data-kpi-step={k.stepCode} data-kpi-text={`${k.name} ${k.step} ${k.baseline} ${k.target} ${k.source}`.toLowerCase()}>
-              <td class="num-col">{k.id}</td>
-              <td set:html={renderInline(k.name)} />
-              <td class="status-col">{k.step}</td>
-              <td set:html={renderInline(k.baseline)} />
-              <td set:html={renderInline(k.target)} />
-              <td class="status-col" style="white-space:normal;">{k.source}</td>
-              <td class="status-col">{k.frequency}</td>
-            </tr>
-          ))}
+          {kpis.map((k) => {
+            const cells = k.cells || [k.id, k.name, k.step, k.baseline, k.target, k.source, k.frequency];
+            return (
+              <tr data-kpi-step={k.stepCode} data-kpi-text={k.searchText || `${k.name} ${k.step} ${k.baseline} ${k.target} ${k.source}`.toLowerCase()}>
+                {kpiHeaders.map((h, idx) => {
+                  const cls = kpiCellClass(h, idx);
+                  const val = cells[idx] ?? '';
+                  return (
+                    <td
+                      class={cls || undefined}
+                      style={cls === 'status-col' && h.toLowerCase().includes('allikas') ? 'white-space:normal;' : undefined}
+                      set:html={idx === 0 ? val.replace(/\*\*/g, '') : renderInline(val || '—')}
+                    />
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
   </section>
+
+  <!-- Any extra ## sections added in Obsidian Veeb/Pikk vaade 2035 — seiretöölaud.md -->
+  {extraSections.length > 0 && (
+    <>
+      <hr class="rule" />
+      <section class="tufte-grid">
+        <div class="tufte-main prose">
+          {extraSections.map((sec) => (
+            <div id={sec.id} style="margin-bottom: 2.5rem;">
+              <h2 style="margin-top: 0;">{sec.heading}</h2>
+              <div set:html={renderMarkdown(sec.markdown)} />
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  )}
 
   <script>
     // Actions filter

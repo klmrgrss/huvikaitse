@@ -8,20 +8,25 @@ interface Props {
   activeNav?: 'home' | 'pikk-vaade' | 'teemad' | 'riigikogu' | 'analuusid';
 }
 
+const site = data.site || {};
+const siteName = site.name || 'EEELi seisukohad';
 const {
   title,
-  description = 'Eesti Ehitusettevõtjate Liidu (EEEL) seisukohad ja „Ehituse pikk vaade 2035“ seire.',
+  description = site.description || 'Eesti Ehitusettevõtjate Liidu (EEEL) seisukohad ja „Ehituse pikk vaade 2035“ seire.',
   activeNav = 'home',
 } = Astro.props;
 
 const base = data.basePath || '/huvikaitse';
+const footerWeb = site.footerWeb || 'https://eeel.ee';
+const footerWebLabel = footerWeb.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const footerEmail = site.footerEmail || 'eeel@eeel.ee';
 ---
 <!DOCTYPE html>
 <html lang="et">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === 'Avaleht' ? 'EEELi seisukohad' : `${title} · EEELi seisukohad`}</title>
+    <title>{title === 'Avaleht' ? siteName : `${title} · ${siteName}`}</title>
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +38,7 @@ const base = data.basePath || '/huvikaitse';
   <body>
     <header class="site-header">
       <div class="page-wrap header-inner">
-        <a href={`${base}/`} class="brand-link">EEELi seisukohad</a>
+        <a href={`${base}/`} class="brand-link">{siteName}</a>
         <nav class="main-nav" aria-label="Peamenüü">
           <a href={`${base}/`} class:list={['nav-link', { active: activeNav === 'home' }]}>Avaleht</a>
           <a href={`${base}/pikk-vaade-2035/`} class:list={['nav-link', { active: activeNav === 'pikk-vaade' }]}>Pikk vaade 2035</a>
@@ -54,9 +59,9 @@ const base = data.basePath || '/huvikaitse';
     <footer class="site-footer">
       <div class="page-wrap footer-inner">
         <div>
-          Eesti Ehitusettevõtjate Liit (EEEL) ·
-          <a href="https://eeel.ee" target="_blank" rel="noopener">eeel.ee</a> ·
-          <a href="mailto:eeel@eeel.ee">eeel@eeel.ee</a>
+          {site.footerOrg || 'Eesti Ehitusettevõtjate Liit (EEEL)'} ·
+          <a href={footerWeb} target="_blank" rel="noopener">{footerWebLabel}</a> ·
+          <a href={`mailto:${footerEmail}`}>{footerEmail}</a>
         </div>
         <div>
           Sünkroonitud: <span class="mono-num">{data.syncedAtDisplay}</span>

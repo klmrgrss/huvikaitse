@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import data from '../data/knowledge.json';
+import { renderMarkdown, renderInline } from '../lib/markdown';
 
 const base = data.basePath || '/huvikaitse';
+const site = data.site || {};
 const featuredTopics = data.topics.filter((t) => t.priority === 'Kõrge');
 const pv = data.pikkVaade;
 const steps = pv?.steps || [];
@@ -24,10 +26,10 @@ const searchDocs = [
     haystack: `${t.title} ${t.workgroup} ${t.summary} ${t.keyPoints.join(' ')}`.toLowerCase(),
   })),
   {
-    title: 'Ehituse pikk vaade 2035 — avalik seiretöölaud ja 24 mõõdikut',
+    title: `${pv?.title || 'Ehituse pikk vaade 2035'} — avalik seiretöölaud ja ${data.counts.kpis} mõõdikut`,
     route: `${base}/pikk-vaade-2035/`,
     group: 'Katuskokkulepe',
-    summary: 'Ülevaade 7 suure sammu ja 39 tegevuse täitmisest ning 24 aastate lõikes jälgitavat seiremõõdikut.',
+    summary: `Ülevaade ${steps.length} suure sammu ja ${klimTotal} tegevuse täitmisest ning ${data.counts.kpis} aastate lõikes jälgitavat seiremõõdikut.`,
     haystack: 'ehituse pikk vaade 2035 töölaud seiremõõdikud kpi klim kontratsüklilisus solidaarvastutus kutsesüsteem',
   },
 ];
@@ -37,12 +39,9 @@ const searchDocs = [
   <!-- Asymmetric opening: editorial thesis left, Tufte word-sized KPIs right -->
   <section class="tufte-grid">
     <div class="tufte-main">
-      <p class="kicker">Eesti Ehitusettevõtjate Liit</p>
-      <h1>EEELi seisukohad</h1>
-      <p class="lead">
-        Koondame ühte avatud vaatesse Eesti ehitusettevõtjate põhimõtted ja lahendused kvaliteetse elukeskkonna,
-        vaba ning ettevõtlust toetava majanduskeskkonna ning 18 osapoole kokkuleppe „Ehituse pikk vaade 2035“ elluviimiseks.
-      </p>
+      <p class="kicker">{site.homeKicker || 'Eesti Ehitusettevõtjate Liit'}</p>
+      <h1>{site.homeTitle || 'EEELi seisukohad'}</h1>
+      <p class="lead" set:html={renderInline(site.homeLead || '')} />
       <div class="text-actions">
         <a href={`${base}/pikk-vaade-2035/`} class="action-link">Ava „Pikk vaade 2035“ seiretöölaud →</a>
         <a href={`${base}/teemad/`} class="action-link-secondary">Sirvi kõiki teemasid ({data.counts.topics}) →</a>
@@ -70,7 +69,7 @@ const searchDocs = [
               <span class="kpi-figure">{data.counts.topics}</span>
               <span class="meta-label">valdkonnateemat</span>
             </div>
-            <div class="kpi-caption">3 töörühma ja katuskokkulepe</div>
+            <div class="kpi-caption">{data.counts.workgroups} töörühma ja katuskokkulepe</div>
           </div>
 
           <div class="kpi-row">
@@ -82,7 +81,7 @@ const searchDocs = [
                   <rect x="0" y="1" width={Math.max(3, Math.round((klimDone / Math.max(klimTotal, 1)) * 52))} height="6" fill="#2c6e49" />
                 </svg>
               </span>
-              <span class="meta-label">KLIM 2026 valmis</span>
+              <span class="meta-label">{pv?.klimBarLabel || 'KLIM 2026'} valmis</span>
             </div>
             <div class="kpi-caption">„Pikk vaade 2035“ vaheülevaade</div>
           </div>
@@ -118,16 +117,13 @@ const searchDocs = [
   <!-- Pikk vaade 2035 editorial summary + margin GDP distribution sparkbars -->
   <section class="tufte-grid">
     <div class="tufte-main">
-      <p class="kicker">Ühiskondlik kokkulepe · 09.06.2021</p>
-      <h2 style="margin-top: 0;">Ehituse pikk vaade 2035 — avalik seiretöölaud</h2>
+      <p class="kicker">{site.homePikkVaadeKicker || 'Ühiskondlik kokkulepe · 09.06.2021'}</p>
+      <h2 style="margin-top: 0;">{site.homePikkVaadeTitle || 'Ehituse pikk vaade 2035 — avalik seiretöölaud'}</h2>
+      <div set:html={renderMarkdown(site.homePikkVaadeBody || '')} />
       <p>
-        Vabariigi Valitsus ja 18 partnerit (linnad, ülikoolid ja erialaliidud) leppisid kokku 7 suures sammus ja
-        38 tegevuses, mille hinnanguline aastane mõju on <strong>+404,5 mln eurot</strong> ehk +1,59% SKP-st.
-        Seiretöölaud võrdleb Kliimaministeeriumi 2026. aasta vaheülevaadet tegeliku edenemisega turul ning koondab
-        24 aastate lõikes jälgitavat tuummõõdikut.
-      </p>
-      <p>
-        <a href={`${base}/pikk-vaade-2035/`} class="action-link">Vaata 7 sammu võrdlust, 39 tegevust ja 24 mõõdikut →</a>
+        <a href={`${base}/pikk-vaade-2035/`} class="action-link">
+          Vaata {steps.length} sammu võrdlust, {klimTotal} tegevust ja {data.counts.kpis} mõõdikut →
+        </a>
       </p>
     </div>
 
@@ -148,9 +144,11 @@ const searchDocs = [
             </div>
           ))}
         </div>
-        <p style="margin: 0.6rem 0 0; font-family: var(--font-sans); font-size: 0.78rem; color: var(--ink-muted);">
-          Samm E2 (kontratsüklilised riigi investeeringud) moodustab 70,9% kogu kokkuleppe majandusmõjust.
-        </p>
+        {site.homePikkVaadeGdpNote && (
+          <p style="margin: 0.6rem 0 0; font-family: var(--font-sans); font-size: 0.78rem; color: var(--ink-muted);">
+            {site.homePikkVaadeGdpNote}
+          </p>
+        )}
       </div>
     </aside>
   </section>
@@ -184,11 +182,7 @@ const searchDocs = [
     <aside class="tufte-margin">
       <div class="margin-block">
         <p class="margin-heading">Töökorraldus</p>
-        <p style="margin: 0;">
-          EEEL-i seisukohad kujunevad kolmes alalises töörühmas, mis koondavad ehitusettevõtete juhte ja
-          valdkonna praktikuid. Katusraamistikuks on ühiskondlik kokkulepe{' '}
-          <a href={`${base}/teemad/ehituse-pikk-vaade-2035-kokkulepe-ja-seire/`}>„Ehituse pikk vaade 2035“</a>.
-        </p>
+        <div style="margin: 0;" set:html={renderMarkdown(site.homeWorkgroupsMargin || '')} />
       </div>
     </aside>
   </section>
@@ -221,10 +215,7 @@ const searchDocs = [
     <aside class="tufte-margin">
       <div class="margin-block">
         <p class="margin-heading">Aluspõhimõte</p>
-        <p style="margin: 0;">
-          Kõik seisukohad lähtuvad vaba ja ettevõtlust toetava majanduskeskkonna, ausa konkurentsi ning
-          kvaliteetse elukeskkonna põhimõttest — lahendused on suunatud kogu ühiskonna ja majanduse pikaajalisele kasule.
-        </p>
+        <div style="margin: 0;" set:html={renderMarkdown(site.homeTopicsMargin || '')} />
       </div>
     </aside>
   </section>
