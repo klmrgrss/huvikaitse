@@ -1,5 +1,5 @@
 {
-  "syncedAtIso": "2026-11-27T08:00:04Z",
+  "syncedAtIso": "2026-11-27T08:11:40Z",
   "syncedAtDisplay": "27.11.2026",
   "basePath": "/huvikaitse",
   "site": {
@@ -962,11 +962,11 @@
         "goalTitle": "Eesmärk 1: Kvaliteetse elukeskkonna kujundamise põhimõtted on kokku lepitud ja osapooled viivad seda üheskoos ellu",
         "nr": "1.1",
         "isNew": false,
-        "title": "Arengudokumendid (uus ÜRP + ehituse ja elamumajanduse arengudokument)",
+        "title": "Arengudokumendid (uus üleriigiline planeering + ehituse ja elamumajanduse arengudokument)",
         "owner": "MKM",
         "klimStatus": "Töös (~50%)",
         "klimCat": "toos",
-        "eeelAssessment": "🟡 **Osaline:** MaRu kontseptsioon (2023) ja ÜRP koostamine (kehtestamine 2026) liiguvad, kuid ühtset riigieelarvega seotud elukeskkonna tulemusvaldkonda ei ole veel loodud.",
+        "eeelAssessment": "🟡 **Osaline:** MaRu kontseptsioon (2023) ja üleriigilise planeeringu koostamine (kehtestamine 2026) liiguvad, kuid ühtset riigieelarvega seotud elukeskkonna tulemusvaldkonda ei ole veel loodud.",
         "eeelCat": "osaline",
         "related": "[Planeeringud ja ehitusload](/huvikaitse/teemad/planeeringud-ja-ehitusload/)",
         "note": "",
@@ -1026,7 +1026,7 @@
         "goalTitle": "Eesmärk 1: Kvaliteetse elukeskkonna kujundamise põhimõtted on kokku lepitud ja osapooled viivad seda üheskoos ellu",
         "nr": "1.4",
         "isNew": false,
-        "title": "Pikaajaliste sotsiaalmajanduslike mõjude hindamine (CBA) ruumiotsustes",
+        "title": "Pikaajaliste sotsiaalmajanduslike mõjude hindamine (tasuvusanalüüs) ruumiotsustes",
         "owner": "MKM",
         "klimStatus": "Alustatud (~25%)",
         "klimCat": "alustatud",
@@ -1106,7 +1106,7 @@
         "goalTitle": "Eesmärk 1: Kvaliteetse elukeskkonna kujundamise põhimõtted on kokku lepitud ja osapooled viivad seda üheskoos ellu",
         "nr": "Uus",
         "isNew": true,
-        "title": "*KLIM-i ettepanek: ehitustehniliste nõuete lihtsustamine*",
+        "title": "*Kliimaministeeriumi ettepanek Ehitusvaldkonna arengukomisjonis (20.01.2026): ehitustehniliste nõuete lihtsustamine*",
         "owner": "*määramisel*",
         "klimStatus": "*—*",
         "klimCat": "uus",
@@ -1154,7 +1154,7 @@
         "goalTitle": "Eesmärk 2: Riigi ehitusinvesteeringud on kontratsüklilised ja kooskõlas riigi strateegilise plaaniga",
         "nr": "Uus",
         "isNew": true,
-        "title": "*KLIM-i ettepanek: riigi maa- ja kinnisvaraportfelli analüüs ja poliitika*",
+        "title": "*Kliimaministeeriumi ettepanek Ehitusvaldkonna arengukomisjonis (20.01.2026): riigi maa- ja kinnisvaraportfelli analüüs ja poliitika*",
         "owner": "*määramisel*",
         "klimStatus": "*—*",
         "klimCat": "uus",
@@ -1238,7 +1238,7 @@
         "owner": "RAM",
         "klimStatus": "Alustatud (~25%)",
         "klimCat": "alustatud",
-        "eeelAssessment": "🔴 **Kitsam käsitlus kui kokku lepitud:** vaheülevaade viitab vaid töötajate registreerimisele platsil (TTKI), kuid riigihangete praktika analüüs ja ebaausate pakkujate järjepidev kõrvaldamine on seni ellu viimata.",
+        "eeelAssessment": "🔴 **Kitsam käsitlus kui kokku lepitud:** vaheülevaade viitab vaid töötajate registreerimise süsteemile ehitusplatsil, kuid riigihangete praktika analüüs ja ebaausate pakkujate järjepidev kõrvaldamine on seni ellu viimata.",
         "eeelCat": "kriitiline",
         "related": "[Aus konkurents ja varimajanduse pidurdamine](/huvikaitse/teemad/aus-konkurents-ja-varimajanduse-pidurdamine/), [Hanketingimused ja konkurents](/huvikaitse/teemad/hanketingimused-ja-konkurents/), [Pea- ja alltöövõtja suhted](/huvikaitse/teemad/pea-ja-alltoovotja-suhted/)",
         "note": "",
@@ -1378,7 +1378,7 @@
         "goalTitle": "Eesmärk 4: Kohalik omavalitsus on ruumilise arengu kujundaja",
         "nr": "Uus",
         "isNew": true,
-        "title": "*KLIM-i ettepanek: eluasemekava(de) koostamine*",
+        "title": "*Kliimaministeeriumi ettepanek Ehitusvaldkonna arengukomisjonis (20.01.2026): eluasemekava(de) koostamine*",
         "owner": "*määramisel*",
         "klimStatus": "*—*",
         "klimCat": "uus",
@@ -1590,7 +1590,7 @@
         "owner": "Era *(sõltub Kutseseadusest / HTM)*",
         "klimStatus": "Seisab (0%)",
         "klimCat": "seisab",
-        "eeelAssessment": "⛔ **Vastuolu kokkuleppega:** kavandatav Kutseseaduse muudatus tööturu kutsestandardite kaotamiseks ei toeta kokkulepitud kvalifikatsioonieesmärki. Kvaliteedi ja ohutuse hoidmiseks tuleb säilitada EKR 4. taseme kutse ja rakendada sektori pakutud motivatsioonimeetmeid.",
+        "eeelAssessment": "⛔ **Vastuolu kokkuleppega:** kavandatav Kutseseaduse muudatus tööturu kutsestandardite kaotamiseks ei toeta kokkulepitud kvalifikatsioonieesmärki. Kvaliteedi ja ohutuse hoidmiseks tuleb säilitada Eesti kvalifikatsiooniraamistiku 4. taseme kutse ja rakendada sektori pakutud motivatsioonimeetmeid.",
         "eeelCat": "vastassuunaline",
         "related": "[Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/)",
         "note": "",
@@ -1622,7 +1622,7 @@
         "owner": "MKM, KLIM",
         "klimStatus": "Alustatud (~25%)",
         "klimCat": "alustatud",
-        "eeelAssessment": "🟡 **Osaline:** töötajate registreerimine ehitusplatsil (TTKI) toimib, kuid laiemat tööjõupoliitikat ja välisriikide pädevustunnistuste läbipaistvat tunnustamist ei ole veel terviklikult lahendatud.",
+        "eeelAssessment": "🟡 **Osaline:** töötajate registreerimise süsteem ehitusplatsil toimib, kuid laiemat tööjõupoliitikat ja välisriikide pädevustunnistuste läbipaistvat tunnustamist ei ole veel terviklikult lahendatud.",
         "eeelCat": "osaline",
         "related": "[Aus konkurents ja varimajanduse pidurdamine](/huvikaitse/teemad/aus-konkurents-ja-varimajanduse-pidurdamine/), [Pädevus ja kutsesüsteem](/huvikaitse/teemad/padevus-ja-kutsesusteem/)",
         "note": "",
@@ -1713,7 +1713,7 @@
         "stepCode": "E4",
         "baseline": "`NA` (2022)",
         "target": "**≤ 12 kuud** *(eesmärk: detailplaneering erandiks)*",
-        "source": "MaRu / PLANIS / Tallinna TPR",
+        "source": "MaRu / PLANIS / Tallinna planeeringute register",
         "frequency": "1× aastas",
         "cells": [
           "**4**",
@@ -1721,10 +1721,10 @@
           "E4 (`4.5`), E1 (`1.6`)",
           "`NA` (2022)",
           "**≤ 12 kuud** *(eesmärk: detailplaneering erandiks)*",
-          "MaRu / PLANIS / Tallinna TPR",
+          "MaRu / PLANIS / Tallinna planeeringute register",
           "1× aastas"
         ],
-        "searchText": "**4** **detailplaneeringu keskmine menetlusaeg** (kuudes; eraldi tallinn/tartu/muu eesti) e4 (`4.5`), e1 (`1.6`) `na` (2022) **≤ 12 kuud** *(eesmärk: detailplaneering erandiks)* maru / planis / tallinna tpr 1× aastas"
+        "searchText": "**4** **detailplaneeringu keskmine menetlusaeg** (kuudes; eraldi tallinn/tartu/muu eesti) e4 (`4.5`), e1 (`1.6`) `na` (2022) **≤ 12 kuud** *(eesmärk: detailplaneering erandiks)* maru / planis / tallinna planeeringute register 1× aastas"
       },
       {
         "id": "5",
@@ -1908,23 +1908,23 @@
       },
       {
         "id": "14",
-        "name": "**Töötajate registreerimise (TTKI) rikkumiste ja solidaarvastutuse seis** (TTKI kontrollide rikkumiste % + õigusakti staatus)",
+        "name": "**Ehitusplatsil töötajate registreerimise rikkumiste ja solidaarvastutuse seis** (töötajate registreerimise kontrollide rikkumiste % + õigusakti staatus)",
         "step": "E3 (`3.3`, `3.5`), E7 (`7.5`)",
         "stepCode": "E3",
-        "baseline": "TTKI käivitatud 2023; solidaarvastutus 0",
+        "baseline": "Töötajate registreerimise süsteem käivitatud 2023; solidaarvastutus 0",
         "target": "**Solidaarvastutus seadustatud; rikkumised ↓**",
         "source": "EMTA statistika",
         "frequency": "1× aastas",
         "cells": [
           "**14**",
-          "**Töötajate registreerimise (TTKI) rikkumiste ja solidaarvastutuse seis** (TTKI kontrollide rikkumiste % + õigusakti staatus)",
+          "**Ehitusplatsil töötajate registreerimise rikkumiste ja solidaarvastutuse seis** (töötajate registreerimise kontrollide rikkumiste % + õigusakti staatus)",
           "**E3 (`3.3`, `3.5`), E7 (`7.5`)**",
-          "TTKI käivitatud 2023; solidaarvastutus 0",
+          "Töötajate registreerimise süsteem käivitatud 2023; solidaarvastutus 0",
           "**Solidaarvastutus seadustatud; rikkumised ↓**",
           "EMTA statistika",
           "1× aastas"
         ],
-        "searchText": "**14** **töötajate registreerimise (ttki) rikkumiste ja solidaarvastutuse seis** (ttki kontrollide rikkumiste % + õigusakti staatus) **e3 (`3.3`, `3.5`), e7 (`7.5`)** ttki käivitatud 2023; solidaarvastutus 0 **solidaarvastutus seadustatud; rikkumised ↓** emta statistika 1× aastas"
+        "searchText": "**14** **ehitusplatsil töötajate registreerimise rikkumiste ja solidaarvastutuse seis** (töötajate registreerimise kontrollide rikkumiste % + õigusakti staatus) **e3 (`3.3`, `3.5`), e7 (`7.5`)** töötajate registreerimise süsteem käivitatud 2023; solidaarvastutus 0 **solidaarvastutus seadustatud; rikkumised ↓** emta statistika 1× aastas"
       },
       {
         "id": "15",
@@ -2068,23 +2068,23 @@
       },
       {
         "id": "22",
-        "name": "**Kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi EKR 3–4 oskustöölised, Tööjuht 5, Ehitusjuht 6, Insener 6–8)",
+        "name": "**Kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi Eesti kvalifikatsiooniraamistiku 3.–4. taseme oskustöölised, Tööjuht 5, Ehitusjuht 6, Insener 6–8)",
         "step": "E7 (`7.3`, `7.4`)",
         "stepCode": "E7",
         "baseline": "*Kutseregister 2021 baas*",
-        "target": "**Kasvav trend kõigil tasemetel; EKR 4 säilitatud**",
+        "target": "**Kasvav trend kõigil tasemetel; 4. taseme oskustöölise kutse säilitatud**",
         "source": "SA Kutsekoda (Kutseregister) / EEEL",
         "frequency": "1× aastas",
         "cells": [
           "**22**",
-          "**Kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi EKR 3–4 oskustöölised, Tööjuht 5, Ehitusjuht 6, Insener 6–8)",
+          "**Kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi Eesti kvalifikatsiooniraamistiku 3.–4. taseme oskustöölised, Tööjuht 5, Ehitusjuht 6, Insener 6–8)",
           "**E7 (`7.3`, `7.4`)**",
           "*Kutseregister 2021 baas*",
-          "**Kasvav trend kõigil tasemetel; EKR 4 säilitatud**",
+          "**Kasvav trend kõigil tasemetel; 4. taseme oskustöölise kutse säilitatud**",
           "SA Kutsekoda (Kutseregister) / EEEL",
           "1× aastas"
         ],
-        "searchText": "**22** **kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi ekr 3–4 oskustöölised, tööjuht 5, ehitusjuht 6, insener 6–8) **e7 (`7.3`, `7.4`)** *kutseregister 2021 baas* **kasvav trend kõigil tasemetel; ekr 4 säilitatud** sa kutsekoda (kutseregister) / eeel 1× aastas"
+        "searchText": "**22** **kehtiva kutsetunnistusega töötajate arv ja osakaal ehitussektoris** (eraldi eesti kvalifikatsiooniraamistiku 3.–4. taseme oskustöölised, tööjuht 5, ehitusjuht 6, insener 6–8) **e7 (`7.3`, `7.4`)** *kutseregister 2021 baas* **kasvav trend kõigil tasemetel; 4. taseme oskustöölise kutse säilitatud** sa kutsekoda (kutseregister) / eeel 1× aastas"
       },
       {
         "id": "23",
@@ -2128,6 +2128,6 @@
       }
     ],
     "extraSections": [],
-    "updated": "2026-11-26"
+    "updated": "2026-11-27"
   }
 }
