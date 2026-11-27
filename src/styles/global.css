@@ -836,7 +836,7 @@ tbody tr:last-child td {
 }
 .mini-dist-row {
   display: grid;
-  grid-template-columns: 28px 1fr 48px;
+  grid-template-columns: 56px 1fr 48px;
   gap: 0.45rem;
   align-items: center;
   font-family: var(--font-mono);

@@ -115,7 +115,7 @@ function kpiCellClass(header: string, idx: number): string {
       const tot = Math.max(s.total || 1, 1);
       const k = s.klimCounts || { valmis: 0, toos: 0, alustatud: 0, seisab: 0 };
       const e = s.eeelCounts || { edasiminek: 0, osaline: 0, kriitiline: 0 };
-      const isDominant = s.code === 'E2';
+      const isDominant = s.num === 2 || s.code === 'Samm 2' || s.code === 'E2';
       return (
         <div class="step-row">
           <div class="step-title">

@@ -258,7 +258,7 @@ def parse_site_config(meta: dict, body_resolved: str) -> dict:
         "homePikkVaadeBody": sections.get("pikk-vaade-2035-plokk", ""),
         "homePikkVaadeGdpNote": str(
             meta.get("pikk_vaade_skp_markus")
-            or "Samm E2 (kontratsüklilised riigi investeeringud) moodustab 70,9% kogu kokkuleppe majandusmõjust."
+            or "Samm 2 (kontratsüklilised riigi investeeringud) moodustab 70,9% kogu kokkuleppe majandusmõjust."
         ),
         "homeWorkgroupsMargin": sections.get("tookorraldus", ""),
         "homeTopicsMargin": sections.get("aluspohimote", ""),
@@ -324,11 +324,15 @@ def parse_pikk_vaade_dashboard(meta: dict, body_resolved: str) -> dict:
         if "suure-sammu" in h_slug or "koondtabel" in h_slug:
             _, _, rows = extract_first_table_and_intro(content)
             for r in rows:
-                if len(r) >= 5 and r[0].startswith("**E"):
-                    code_m = re.search(r"E(\d)", r[0])
-                    code = f"E{code_m.group(1)}" if code_m else r[0]
-                    name = re.sub(r"\*\*E\d+\.\*\*\s*", "", r[0]).strip()
+                if len(r) >= 5:
+                    code_m = re.match(r"^\*\*(?:Samm\s+|E)(\d+)\.\*\*\s*(.*)$", r[0])
+                    if not code_m:
+                        continue
+                    step_num = int(code_m.group(1))
+                    code = f"Samm {step_num}"
+                    name = code_m.group(2).strip()
                     steps_summary.append({
+                        "num": step_num,
                         "code": code,
                         "name": name,
                         "costMln": r[1].replace("**", ""),
@@ -343,7 +347,7 @@ def parse_pikk_vaade_dashboard(meta: dict, body_resolved: str) -> dict:
             if first_h3:
                 actions_intro = content[: first_h3.start()].strip()
             goal_sections = re.finditer(
-                r"### (Eesmärk (\d+): [^\n]+)\n((?:\|[^\n]+\n?)+)", content
+                r"### ((?:Eesmärk|Samm) (\d+): [^\n]+)\n((?:\|[^\n]+\n?)+)", content
             )
             for gm in goal_sections:
                 goal_title = gm.group(1).strip()
@@ -389,7 +393,7 @@ def parse_pikk_vaade_dashboard(meta: dict, body_resolved: str) -> dict:
 
                     actions.append({
                         "goalNum": goal_num,
-                        "goalCode": f"E{goal_num}",
+                        "goalCode": f"Samm {goal_num}",
                         "goalTitle": goal_title,
                         "nr": nr,
                         "isNew": nr.lower() == "uus",
@@ -418,7 +422,7 @@ def parse_pikk_vaade_dashboard(meta: dict, body_resolved: str) -> dict:
                 if len(r) >= 2:
                     padded = r + [""] * max(0, len(headers) - len(r))
                     step_val = padded[step_col_idx] if step_col_idx < len(padded) else ""
-                    step_m = re.search(r"E(\d)", step_val)
+                    step_m = re.search(r"(?:Samm\s+|E)(\d+)", step_val)
                     plain_search = " ".join(
                         re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", c) for c in padded
                     ).lower()
@@ -426,7 +430,7 @@ def parse_pikk_vaade_dashboard(meta: dict, body_resolved: str) -> dict:
                         "id": padded[0].replace("**", "").strip(),
                         "name": padded[1].strip() if len(padded) > 1 else "",
                         "step": step_val.replace("**", "").strip(),
-                        "stepCode": f"E{step_m.group(1)}" if step_m else "E1",
+                        "stepCode": f"Samm {step_m.group(1)}" if step_m else "Samm 1",
                         "baseline": padded[3].strip() if len(padded) > 3 else "",
                         "target": padded[4].strip() if len(padded) > 4 else "",
                         "source": padded[5].strip() if len(padded) > 5 else "",
